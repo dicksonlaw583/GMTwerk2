@@ -1,0 +1,49 @@
+{
+  "resources": [
+    {"id":{"name":"__GMA_BREAKPOINT__","path":"scripts/__GMA_BREAKPOINT__/__GMA_BREAKPOINT__.yy",},"order":0,},
+    {"id":{"name":"GMAssert","path":"extensions/GMAssert/GMAssert.yy",},"order":1,},
+    {"id":{"name":"gmtk2_test_all","path":"scripts/gmtk2_test_all/gmtk2_test_all.yy",},"order":0,},
+    {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"HTML5","path":"options/html5/options_html5.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+    {"name":"Windows UWP","path":"options/windowsuap/options_windowsuap.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrder": [
+    {"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},
+  ],
+  "Folders": [
+    {"folderPath":"folders/GMTwerk2.yy","order":1,"resourceVersion":"1.0","name":"GMTwerk2","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GMTwerk2_test.yy","order":2,"resourceVersion":"1.0","name":"GMTwerk2_test","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/GMAssert.yy","order":6,"resourceVersion":"1.0","name":"GMAssert","tags":[],"resourceType":"GMFolder",},
+  ],
+  "AudioGroups": [
+    {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "23.1.1.168",
+  },
+  "resourceVersion": "1.3",
+  "name": "GMTwerk2",
+  "tags": [],
+  "resourceType": "GMProject",
+}
