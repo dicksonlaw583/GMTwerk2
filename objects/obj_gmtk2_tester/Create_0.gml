@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 4;
+maxProgress = 9;
 
 // Delay
 Delay(1000, function() {
@@ -20,6 +20,11 @@ Delay(1000, function() {
 
 // Repeat
 Repeat(300, 3, function() {
+	++progress;
+});
+
+// ForEach
+ForEach(200, ["foo", "bar", "baz", "qux", "waahoo"], function() {
 	++progress;
 });
 

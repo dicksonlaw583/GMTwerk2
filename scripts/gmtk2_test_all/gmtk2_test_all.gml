@@ -7,6 +7,7 @@ function gmtk2_test_all() {
 	gmtk2_test_basics();
 	gmtk2_test_delay();
 	gmtk2_test_repeat();
+	gmtk2_test_foreach();
 	/** ^^ Place tests here ^^ **/
 	
 	var timeB = current_time;
