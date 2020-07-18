@@ -25,7 +25,12 @@ function RepeatActor(_interval, _repeats, _onRepeat) : GMTwerkActor() constructo
 	repeats = _repeats;
 	onRepeat = _onRepeat;
 	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
+		variable_struct_set(self, argument[i], argument[i+1]);
+	}
+	
+	// Done on start if repeats <= 0
+	if (repeats <= 0) {
+		done();
 	}
 }
 
