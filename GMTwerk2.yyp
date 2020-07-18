@@ -11,9 +11,11 @@
     {"id":{"name":"__GMA_BREAKPOINT__","path":"scripts/__GMA_BREAKPOINT__/__GMA_BREAKPOINT__.yy",},"order":0,},
     {"id":{"name":"GMAssert","path":"extensions/GMAssert/GMAssert.yy",},"order":1,},
     {"id":{"name":"obj_gmtk2_tester","path":"objects/obj_gmtk2_tester/obj_gmtk2_tester.yy",},"order":1,},
+    {"id":{"name":"gmtk2_test_while","path":"scripts/gmtk2_test_while/gmtk2_test_while.yy",},"order":6,},
     {"id":{"name":"gmtk2_test_basics","path":"scripts/gmtk2_test_basics/gmtk2_test_basics.yy",},"order":3,},
     {"id":{"name":"gmtk2_test_repeat","path":"scripts/gmtk2_test_repeat/gmtk2_test_repeat.yy",},"order":4,},
     {"id":{"name":"gmtk2_test_all","path":"scripts/gmtk2_test_all/gmtk2_test_all.yy",},"order":0,},
+    {"id":{"name":"GMTwerk_While","path":"scripts/GMTwerk_While/GMTwerk_While.yy",},"order":6,},
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},"order":0,},
   ],
   "Options": [
