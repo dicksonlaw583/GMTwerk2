@@ -11,10 +11,18 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 1;
+maxProgress = 4;
 
 // Delay
 Delay(1000, function() {
 	++progress;
 });
+
+// Repeat
+Repeat(300, 3, function() {
+	++progress;
+});
+
+// Timeout for asynchronous test is 1 second (plus one step)
+alarm[0] = room_speed+1;
 /** ^^ Place asynchronous tests here ^^ **/
