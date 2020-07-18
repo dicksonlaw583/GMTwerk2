@@ -66,6 +66,37 @@ function gmtk2_test_basics() {
 	assert_equal(bank.get(0), actor, "GMTwerkBank Drop actors 2b");
 	#endregion
 	
+	#region GMTwerkArrayIterator
+	var iterator;
+	
+	// 0 entries
+	iterator = new GMTwerkArrayIterator([]);
+	assert_fail(iterator.hasNext(), "GMTwerkArrayIterator 0 entries 1a");
+	assert_equal([iterator.index, iterator.value], [0, undefined], "GMTwerkArrayIterator 0 entries 1b");
+	
+	// 1 entry
+	iterator = new GMTwerkArrayIterator(["foo"]);
+	assert(iterator.hasNext(), "GMTwerkArrayIterator 1 entry 1a");
+	assert_equal([iterator.index, iterator.value], [0, "foo"], "GMTwerkArrayIterator 1 entry 1b");
+	iterator.next();
+	assert_fail(iterator.hasNext(), "GMTwerkArrayIterator 1 entry 2a");
+	assert_equal([iterator.index, iterator.value], [1, undefined], "GMTwerkArrayIterator 1 entry 2b");
+	
+	// 2+ entries
+	iterator = new GMTwerkArrayIterator(["FOO", "BAR", "BAZ"]);
+	assert(iterator.hasNext(), "GMTwerkArrayIterator 2+ entries 1a");
+	assert_equal([iterator.index, iterator.value], [0, "FOO"], "GMTwerkArrayIterator 2+ entries 1b");
+	iterator.next();
+	assert(iterator.hasNext(), "GMTwerkArrayIterator 2+ entries 2a");
+	assert_equal([iterator.index, iterator.value], [1, "BAR"], "GMTwerkArrayIterator 2+ entries 2b");
+	iterator.next();
+	assert(iterator.hasNext(), "GMTwerkArrayIterator 2+ entries 3a");
+	assert_equal([iterator.index, iterator.value], [2, "BAZ"], "GMTwerkArrayIterator 2+ entries 3b");
+	iterator.next();
+	assert_fail(iterator.hasNext(), "GMTwerkArrayIterator 2+ entries 4a");
+	assert_equal([iterator.index, iterator.value], [3, undefined], "GMTwerkArrayIterator 2+ entries 4b");
+	#endregion
+	
 	#region __gmtwerk_time__(time)
 	// Save original host speed
 	var originalHostSpeed = global.__gmtwerk_host_speed__;

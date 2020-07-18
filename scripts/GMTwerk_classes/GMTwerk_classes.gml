@@ -122,6 +122,28 @@ function GMTwerkBank() constructor {
 	};
 }
 
+///@func GMTwerkArrayIterator(array)
+///@param {array} array An array to iterate over
+///@desc Iterator over the given array
+function GMTwerkArrayIterator(_array) constructor {
+	///@func hasNext()
+	///@desc Return whether there are entries to iterate
+	static hasNext = function() {
+		return index < array_length(array);
+	};
+	
+	///@func next()
+	///@desc Go to the next entry of the array
+	static next = function() {
+		value = (++index < array_length(array)) ? array[index] : undefined;
+	};
+	
+	// Constructor
+	array = _array;
+	index = 0;
+	value = (array_length(array) > 0) ? array[0] : undefined;
+}
+
 ///@func __gmtwerk_insert__(actor)
 ///@param {GMTwerkActor} actor The actor to insert into the main bank
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
