@@ -12,23 +12,20 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 /** vv Place asynchronous tests here vv **/
 progress = 0;
 maxProgress = 16;
-
-// Delay
-Delay(1000, function() {
+progressUp = function() {
 	++progress;
-});
+};
 
-// Repeat
-Repeat(300, 3, function() {
-	++progress;
-});
+// Delay (1)
+Delay(1000, progressUp);
 
-// ForEach
-ForEach(200, ["foo", "bar", "baz", "qux", "waahoo"], function() {
-	++progress;
-});
+// Repeat (3)
+Repeat(300, 3, progressUp);
 
-// While
+// ForEach (5)
+ForEach(200, ["foo", "bar", "baz", "qux", "waahoo"], progressUp);
+
+// While (
 whilenum = 4;
 While(200, function() {
 	return whilenum > 0;
@@ -40,18 +37,12 @@ While(200, function() {
 // WhenTrue
 WhenTrue(function() {
 	return alarm[0] < 10;
-}, function() {
-	++progress;
-});
+}, progressUp);
 
 // WhenToggle
 WhenToggle(function() {
 	return 10 <= alarm[0] && alarm[0] <= 20;
-}, function() {
-	++progress;
-}, function() {
-	++progress;
-});
+}, progressUp, progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;
