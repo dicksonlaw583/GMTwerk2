@@ -30,13 +30,17 @@ function WhileActor(_interval, _condition, _onIterate) : GMTwerkActor() construc
 	};
 	
 	// Constructor
-	time = __gmtwerk_time__(_interval);
+	time = _interval;
 	interval = time;
 	condition = _condition;
 	onIterate = _onIterate;
 	for (var i = 3; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
+	
+	// Convert time
+	time = convertTime(time);
+	interval = convertTime(interval);
 	
 	// Done on start if condition starts off false
 	if (!condition()) {

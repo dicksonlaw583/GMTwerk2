@@ -14,11 +14,14 @@ function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 	};
 	
 	// Constructor
-	time = __gmtwerk_time__(_time);
+	time = _time;
 	onDone = _onDone;
 	for (var i = 2; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
+	
+	// Convert times
+	time = convertTime(time);
 	
 	// Done on start if time <= 0
 	if (time <= 0) {

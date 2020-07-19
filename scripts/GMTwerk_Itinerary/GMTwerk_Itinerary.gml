@@ -34,7 +34,7 @@ function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
 		itinerary.next();
 		// Has next content
 		if (itinerary.hasNext()) {
-			nextMoment = __gmtwerk_time__(itinerary.index);
+			nextMoment = convertTime(itinerary.index);
 			nextAction = itinerary.value;
 			return true;
 		}
@@ -45,16 +45,19 @@ function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
 	};
 	
 	// Constructor
-	time = __gmtwerk_time__(_time);
+	time = _time;
 	countUp = time <= 0;
 	itinerary = is_array(_itinerary) ? new GMTwerkItineraryIterator(_itinerary) : _itinerary;
 	for (var i = 2; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
 	
+	// Convert times
+	time = convertTime(time);
+	
 	// Set up first moment if itinerary is non-empty
 	if (itinerary.hasNext()) {
-		nextMoment = __gmtwerk_time__(itinerary.index);
+		nextMoment = convertTime(itinerary.index);
 		nextAction = itinerary.value;
 		// If first moment is equal to starting time, run it
 		if (nextMoment == time) {

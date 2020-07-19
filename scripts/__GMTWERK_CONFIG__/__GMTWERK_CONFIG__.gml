@@ -1,8 +1,9 @@
 /**
-Configure speed mode here.
-- 1: Default one step per frame. All GMTwerk functions accept time in milliseconds (real) or steps (int64).
-- <number>: <number> steps per frame. All GMTwerk functions accept time in milliseconds (real) or steps (int64).
-- undefined: Delta time. All GMTwerk functions then accept time in milliseconds only.
-
+The speed multiplier for step-based time
 */
-global.__gmtwerk_host_speed__ = 1;
+#macro GMTWERK_DEFAULT_STEP_SPEED 1
+
+/**
+Whether to default actors to delta time (true) or step-based time (false)
+*/
+#macro GMTWERK_DEFAULT_TIME_MODE (false)

@@ -51,14 +51,30 @@ function GMTwerkActor() constructor {
 		}
 	};
 	
-	///@func act(steps)
-	///@param {real} steps Number of steps passed since last tick
+	///@func act(time)
+	///@param {real} time Time units passed since last tick
 	///@desc Call onAct if the actor is still live, return the state
-	static act = function(steps) {
+	static act = function(_time) {
 		if (state) {
-			onAct(steps);
+			onAct(_time);
 		}
 		return state;
+	};
+	
+	///@func convertTime(time)
+	///@param {real|int64} time
+	///@desc Return the equivalent of the given time in the current time mode's lowest unit of time
+	static convertTime = function(_time) {
+		// int64: Treat as lowest denominator of current time mode
+		// If delta time enabled: Microseconds
+		// If delta time disabled: Steps
+		if (is_int64(_time)) {
+			return real(_time);
+		}
+		// real: Treat as millisecond figure.
+		// If delta time enabled: Convert to microsecond figure
+		// If delta time disabled: Convert to steps figure
+		return _time * (deltaTime ? 1000 : room_speed/1000);
 	};
 	
 	// Constructor
@@ -66,6 +82,7 @@ function GMTwerkActor() constructor {
 	onPause = noop;
 	onStop = noop;
 	onDone = noop;
+	deltaTime = GMTWERK_DEFAULT_TIME_MODE;
 	static onAct = noop; //Overridden by children
 }
 
@@ -83,17 +100,20 @@ function GMTwerkBank() constructor {
 		++size;
 	};
 	
-	///@func act(time)
+	///@func act(<steps>, <microseconds>)
 	///@param {real} time The amount of time to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
-	static act = function(time) {
+	static act = function() {
+		// Capture times
+		var steps = (argument_count > 0) ? argument[0] : 1;
+		var microseconds = (argument_count > 1) ? argument[1] : delta_time;
 		// For every node in the linked list
 		var previousNode = undefined;
 		var currentNode = _head;
 		while (!is_undefined(currentNode)) {
 			var currentActor = currentNode[0];
 			// If the actor is done already or ended up done after acting, unlink it
-			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(time) <= GMTWERK_STATE.DONE) {
+			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(currentActor.deltaTime ? microseconds : steps) <= GMTWERK_STATE.DONE) {
 				if (is_undefined(previousNode)) {
 					_head = currentNode[1];
 				} else {
@@ -152,16 +172,4 @@ function __gmtwerk_insert__(actor) {
 		instance_create_layer(0, 0, 0, __gmtwerk_host__);
 	}
 	__gmtwerk_host__.__twerks__.add(actor);
-}
-
-///@func __gmtwerk_time__(time)
-///@param {real|int64} time 
-///@desc Convert the given time to the correct units, given current GMTwerk settings
-function __gmtwerk_time__(time) {
-	// Delta time in microseconds
-	if (is_undefined(global.__gmtwerk_host_speed__)) {
-		return real(time)*1000;
-	}
-	// Non-delta time in steps (int64) or milliseconds (real)
-	return is_int64(time) ? real(time) : room_speed*time/1000;
 }

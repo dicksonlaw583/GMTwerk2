@@ -4,6 +4,7 @@ function gmtk2_test_basics() {
 	
 	#region GMTwerkActor
 	actor = new GMTwerkActor();
+	actor.deltaTime = false;
 	
 	// Defaults
 	assert_equal(actor.state, GMTWERK_STATE.ACTIVE, "GMTwerkActor Defaults 1");
@@ -24,9 +25,16 @@ function gmtk2_test_basics() {
 	
 	// Done
 	actor2 = new GMTwerkActor();
+	actor2.deltaTime = true;
 	assert_equal(actor2.state, GMTWERK_STATE.ACTIVE, "GMTwerkActor Done 1");
 	actor2.done();
 	assert_equal(actor2.state, GMTWERK_STATE.DONE, "GMTwerkActor Done 2");
+	
+	// Convert Time
+	assert_equal(actor.convertTime(500), room_speed/2, "GMTwerkActor Convert Time 1a");
+	assert_equal(actor.convertTime(int64(20)), 20, "GMTwerkActor Convert Time 1b");
+	assert_equal(actor2.convertTime(234), 234000, "GMTwerkActor Convert Time 2a");
+	assert_equal(actor2.convertTime(int64(345)), 345, "GMTwerkActor Convert Time 2b");
 	#endregion
 	
 	#region GMTwerkBank
@@ -95,23 +103,5 @@ function gmtk2_test_basics() {
 	iterator.next();
 	assert_fail(iterator.hasNext(), "GMTwerkArrayIterator 2+ entries 4a");
 	assert_equal([iterator.index, iterator.value], [3, undefined], "GMTwerkArrayIterator 2+ entries 4b");
-	#endregion
-	
-	#region __gmtwerk_time__(time)
-	// Save original host speed
-	var originalHostSpeed = global.__gmtwerk_host_speed__;
-	
-	// Delta time: Return microseconds from milliseconds
-	global.__gmtwerk_host_speed__ = undefined;
-	assert_equal(__gmtwerk_time__(234), 234000, "__gmtwerk_time__ Delta time 1");
-	assert_equal(__gmtwerk_time__(int64(345)), 345000, "__gmtwerk_time__ Delta time 2");
-	
-	// Non-delta time: Return steps
-	global.__gmtwerk_host_speed__ = 1;
-	assert_equal(__gmtwerk_time__(500), room_speed/2, "__gmtwerk_time__ Non-delta time 1");
-	assert_equal(__gmtwerk_time__(int64(20)), 20, "__gmtwerk_time__ Non-delta time 2");
-	
-	// Restore original host speed
-	global.__gmtwerk_host_speed__ = originalHostSpeed;
 	#endregion
 }

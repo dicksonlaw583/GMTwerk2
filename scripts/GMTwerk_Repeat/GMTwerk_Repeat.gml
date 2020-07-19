@@ -20,13 +20,17 @@ function RepeatActor(_interval, _repeats, _onRepeat) : GMTwerkActor() constructo
 	};
 	
 	// Constructor
-	time = __gmtwerk_time__(_interval);
+	time = _interval;
 	interval = time;
 	repeats = _repeats;
 	onRepeat = _onRepeat;
 	for (var i = 3; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
+	
+	// Convert times
+	time = convertTime(time);
+	interval = convertTime(interval);
 	
 	// Done on start if repeats <= 0
 	if (repeats <= 0) {

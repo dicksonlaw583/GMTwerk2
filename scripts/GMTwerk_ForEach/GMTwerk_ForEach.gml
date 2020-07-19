@@ -22,13 +22,17 @@ function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constru
 	};
 	
 	// Constructor
-	time = __gmtwerk_time__(_interval);
+	time = _interval;
 	interval = time;
 	iterable = is_array(_iterable) ? new GMTwerkArrayIterator(_iterable) : _iterable;
 	onIterate = _onIterate;
 	for (var i = 3; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
+	
+	// Convert times
+	time = convertTime(time);
+	interval = convertTime(interval);
 	
 	// Done on start if nothing to iterate
 	if (!iterable.hasNext()) {
