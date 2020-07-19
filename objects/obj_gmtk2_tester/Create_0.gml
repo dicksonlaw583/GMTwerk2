@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 16;
+maxProgress = 22;
 progressUp = function() {
 	++progress;
 };
@@ -43,6 +43,18 @@ WhenTrue(function() {
 WhenToggle(function() {
 	return 10 <= alarm[0] && alarm[0] <= 20;
 }, progressUp, progressUp);
+
+// Itinerary
+Itinerary(0, [
+	[100, progressUp],
+	[300, progressUp],
+	[700, progressUp],
+]);
+Itinerary(900, [
+	[700, progressUp],
+	[500, progressUp],
+	[300, progressUp],
+]);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;
