@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 13;
+maxProgress = 14;
 
 // Delay
 Delay(1000, function() {
@@ -34,6 +34,13 @@ While(200, function() {
 	return whilenum > 0;
 }, function() {
 	--whilenum;
+	++progress;
+});
+
+// WhenTrue
+WhenTrue(function() {
+	return alarm[0] < 10;
+}, function() {
 	++progress;
 });
 
