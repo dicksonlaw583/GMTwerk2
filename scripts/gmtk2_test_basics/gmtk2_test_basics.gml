@@ -50,15 +50,15 @@ function gmtk2_test_basics() {
 	// Enqueue actors
 	bank.add(actor);
 	assert_equal(bank.size, 1, "GMTwerkBank Enqueue actors 1a");
-	assert_equal(bank.get(0), actor, "GMTwerkBank Enqueue actors 1b");
+	assert_is(bank.get(0), actor, "GMTwerkBank Enqueue actors 1b");
 	bank.add(actor2);
 	assert_equal(bank.size, 2, "GMTwerkBank Enqueue actors 2a");
-	assert_equal(bank.get(0), actor2, "GMTwerkBank Enqueue actors 2b");
-	assert_equal(bank.get(1), actor, "GMTwerkBank Enqueue actors 2c");
+	assert_is(bank.get(0), actor2, "GMTwerkBank Enqueue actors 2b");
+	assert_is(bank.get(1), actor, "GMTwerkBank Enqueue actors 2c");
 	bank.act(1);
 	assert_equal(bank.size, 2, "GMTwerkBank Enqueue actors 3a");
-	assert_equal(bank.get(0), actor2, "GMTwerkBank Enqueue actors 3b");
-	assert_equal(bank.get(1), actor, "GMTwerkBank Enqueue actors 3c");
+	assert_is(bank.get(0), actor2, "GMTwerkBank Enqueue actors 3b");
+	assert_is(bank.get(1), actor, "GMTwerkBank Enqueue actors 3c");
 	
 	// Drop actors
 	bank.add(actor3);
@@ -66,12 +66,12 @@ function gmtk2_test_basics() {
 	actor2.done();
 	bank.act(1);
 	assert_equal(bank.size, 2, "GMTwerkBank Drop actors 1a");
-	assert_equal(bank.get(0), actor3, "GMTwerkBank Drop actors 1b");
-	assert_equal(bank.get(1), actor, "GMTwerkBank Drop actors 1c");
+	assert_is(bank.get(0), actor3, "GMTwerkBank Drop actors 1b");
+	assert_is(bank.get(1), actor, "GMTwerkBank Drop actors 1c");
 	actor3.done();
 	bank.act(1);
 	assert_equal(bank.size, 1, "GMTwerkBank Drop actors 2a");
-	assert_equal(bank.get(0), actor, "GMTwerkBank Drop actors 2b");
+	assert_is(bank.get(0), actor, "GMTwerkBank Drop actors 2b");
 	#endregion
 	
 	#region GMTwerkArrayIterator
