@@ -13,6 +13,7 @@ function gmtk2_test_all() {
 	gmtk2_test_whentoggle();
 	gmtk2_test_itinerary();
 	gmtk2_test_selectors();
+	gmtk2_test_logvalue();
 	/** ^^ Place tests here ^^ **/
 	
 	var timeB = current_time;

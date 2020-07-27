@@ -82,6 +82,7 @@ function GMTwerkActor() constructor {
 	onPause = noop;
 	onStop = noop;
 	onDone = noop;
+	onLost = noop;
 	deltaTime = GMTWERK_DEFAULT_TIME_MODE;
 	static onAct = noop; //Overridden by children
 }
