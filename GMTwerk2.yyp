@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"__gmtwerk_host__","path":"objects/__gmtwerk_host__/__gmtwerk_host__.yy",},"order":0,},
+    {"id":{"name":"GMTwerk_tween_blends","path":"scripts/GMTwerk_tween_blends/GMTwerk_tween_blends.yy",},"order":13,},
     {"id":{"name":"gmtk2_test_foreach","path":"scripts/gmtk2_test_foreach/gmtk2_test_foreach.yy",},"order":5,},
     {"id":{"name":"gmtk2_test_delay","path":"scripts/gmtk2_test_delay/gmtk2_test_delay.yy",},"order":2,},
     {"id":{"name":"GMTwerk_classes","path":"scripts/GMTwerk_classes/GMTwerk_classes.yy",},"order":2,},
@@ -12,7 +13,9 @@
     {"id":{"name":"__GMTWERK_CONFIG__","path":"scripts/__GMTWERK_CONFIG__/__GMTWERK_CONFIG__.yy",},"order":1,},
     {"id":{"name":"__GMA_BREAKPOINT__","path":"scripts/__GMA_BREAKPOINT__/__GMA_BREAKPOINT__.yy",},"order":0,},
     {"id":{"name":"gmtk2_test_itinerary","path":"scripts/gmtk2_test_itinerary/gmtk2_test_itinerary.yy",},"order":9,},
+    {"id":{"name":"gmtk2_test_blends","path":"scripts/gmtk2_test_blends/gmtk2_test_blends.yy",},"order":12,},
     {"id":{"name":"GMTwerk_selectors","path":"scripts/GMTwerk_selectors/GMTwerk_selectors.yy",},"order":10,},
+    {"id":{"name":"GMTwerk_tween_equations","path":"scripts/GMTwerk_tween_equations/GMTwerk_tween_equations.yy",},"order":12,},
     {"id":{"name":"gmtk2_test_logvalue","path":"scripts/gmtk2_test_logvalue/gmtk2_test_logvalue.yy",},"order":11,},
     {"id":{"name":"GMAssert","path":"extensions/GMAssert/GMAssert.yy",},"order":1,},
     {"id":{"name":"GMTwerk_LogValue","path":"scripts/GMTwerk_LogValue/GMTwerk_LogValue.yy",},"order":11,},
