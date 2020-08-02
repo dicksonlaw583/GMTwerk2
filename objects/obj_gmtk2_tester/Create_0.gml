@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 30;
+maxProgress = 31;
 progressUp = function() {
 	++progress;
 };
@@ -63,6 +63,7 @@ LogValue(DataUnit(0), 3, 200, "onLog", progressUp);
 Tween(DataUnit(0), 5, 800, "onDone", progressUp);
 ZenosTween(DataUnit(8), 0, 0.25, "onDone", progressUp);
 StepTween(DataUnit(0), room_speed, 1, "onDone", progressUp);
+ChannelTween(DataUnit(8), 0, 800, ac_gmtk2_linear, "onDone", progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;

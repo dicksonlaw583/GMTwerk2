@@ -117,4 +117,23 @@ function gmtk2_test_tween() {
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.DONE, -2, true, false, false], "StepTween run to completion 2");
 	#endregion
+
+	#region ChannelTween run to completion
+	listener = {
+		value: 6,
+		done: false,
+		lost: false,
+		stop: false,
+		doDone: function() { done = true; },
+		doLost: function() { lost = true; },
+		doStop: function() { stop = true; },
+	};
+	selector = StructVar("value", listener);
+	tweener = new ChannelTweenActor(selector, 10, int64(2), [ac_gmtk2_linear, 0], "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "ChannelTween run to completion 0");
+	tweener.act(1);
+	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "ChannelTween run to completion 1");
+	tweener.act(1);
+	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.DONE, 10, true, false, false], "ChannelTween run to completion 2");
+	#endregion
 }

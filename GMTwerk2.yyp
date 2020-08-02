@@ -18,6 +18,7 @@
     {"id":{"name":"GMTwerk_selectors","path":"scripts/GMTwerk_selectors/GMTwerk_selectors.yy",},"order":10,},
     {"id":{"name":"GMTwerk_tween_equations","path":"scripts/GMTwerk_tween_equations/GMTwerk_tween_equations.yy",},"order":12,},
     {"id":{"name":"gmtk2_test_logvalue","path":"scripts/gmtk2_test_logvalue/gmtk2_test_logvalue.yy",},"order":11,},
+    {"id":{"name":"ac_gmtk2_linear","path":"animcurves/ac_gmtk2_linear/ac_gmtk2_linear.yy",},"order":14,},
     {"id":{"name":"GMAssert","path":"extensions/GMAssert/GMAssert.yy",},"order":1,},
     {"id":{"name":"GMTwerk_LogValue","path":"scripts/GMTwerk_LogValue/GMTwerk_LogValue.yy",},"order":11,},
     {"id":{"name":"gmtk2_test_whentoggle","path":"scripts/gmtk2_test_whentoggle/gmtk2_test_whentoggle.yy",},"order":8,},

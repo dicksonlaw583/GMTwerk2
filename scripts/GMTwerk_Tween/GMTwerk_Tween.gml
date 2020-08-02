@@ -201,3 +201,60 @@ function StepTween(_subject, _target, _step) {
 	__gmtwerk_insert__(actor);
 	return actor;
 }
+
+///@func ChannelTweenActor(subject, target, time, channel, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int64} time The time to take
+///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@desc Actor for tweening a value to a target using the given animation curve channel
+function ChannelTweenActor(_subject, _target, _time, _channel) : BaseTweenActor(_subject, _target) constructor {
+	///@func tweenPerform(time)
+	///@param {real} time Steps (non-delta time) or microseconds (delta time) passed
+	///@desc Per-step action for this tweening actor
+	static tweenPerform = function(_timePassed) {
+		elapsedTime += _timePassed;
+		if (elapsedTime > time) {
+			elapsedTime = time;
+		}
+		var channelY = (animcurve_channel_evaluate(channel, elapsedTime/time)-y0)/(y1-y0);
+		if (is_undefined(blend)) {
+			return lerp(source, target, channelY);
+		}
+		return script_execute(blend, source, target, channelY);
+	};
+	
+	///@func tweenIsDone()
+	///@desc Return whether this tweening actor is done
+	static tweenIsDone = function() {
+		return elapsedTime >= time;
+	};
+	
+	// Constructor
+	time = _time;
+	channel = is_struct(_channel) ? _channel : (is_array(_channel) ? animcurve_get_channel(_channel[0], _channel[1]) : animcurve_get_channel(_channel, 0));
+	y0 = 0;
+	y1 = 1;
+	blend = undefined;
+	for (var i = 4; i < argument_count; i += 2) {
+		variable_struct_set(self, argument[i], argument[i+1]);
+	}
+	time = convertTime(time);
+	elapsedTime = 0;
+}
+
+///@func ChannelTween(subject, target, time, channel, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int64} time The time to take
+///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@desc Enqueue and return a new curve channel tweening actor
+function ChannelTween(_subject, _target, _time, _channel) {
+	var actor = new ChannelTweenActor(_subject, _target, _time, _channel);
+	for (var i = 4; i < argument_count; i += 2) {
+		variable_struct_set(actor, argument[i], argument[i+1]);
+	}
+	__gmtwerk_insert__(actor);
+	return actor;
+}
+
