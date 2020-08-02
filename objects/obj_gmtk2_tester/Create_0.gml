@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 27;
+maxProgress = 30;
 progressUp = function() {
 	++progress;
 };
@@ -25,7 +25,7 @@ Repeat(300, 3, progressUp);
 // ForEach (5)
 ForEach(200, ["foo", "bar", "baz", "qux", "waahoo"], progressUp);
 
-// While (
+// While (4)
 whilenum = 4;
 While(200, function() {
 	return whilenum > 0;
@@ -34,17 +34,17 @@ While(200, function() {
 	++progress;
 });
 
-// WhenTrue
+// WhenTrue (1)
 WhenTrue(function() {
 	return alarm[0] < 10;
 }, progressUp);
 
-// WhenToggle
+// WhenToggle (2)
 WhenToggle(function() {
 	return 10 <= alarm[0] && alarm[0] <= 20;
 }, progressUp, progressUp);
 
-// Itinerary
+// Itinerary (6)
 Itinerary(0, [
 	[100, progressUp],
 	[300, progressUp],
@@ -56,8 +56,13 @@ Itinerary(900, [
 	[300, progressUp],
 ]);
 
-// LogValue
+// LogValue (5)
 LogValue(DataUnit(0), 3, 200, "onLog", progressUp);
+
+// Tween (3)
+Tween(DataUnit(0), 5, 800, "onDone", progressUp);
+ZenosTween(DataUnit(8), 0, 0.25, "onDone", progressUp);
+StepTween(DataUnit(0), room_speed, 1, "onDone", progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;

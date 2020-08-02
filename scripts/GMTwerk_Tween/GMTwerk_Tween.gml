@@ -1,0 +1,203 @@
+///@func BaseTweenActor(subject, target, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@desc Basis for a tweening actor
+function BaseTweenActor(_subject, _target) : GMTwerkActor() constructor {
+	///@func onAct(time)
+	///@param {real} time Steps (non-delta time) or microseconds (delta time) passed
+	///@desc Per-step action for this actor
+	static onAct = function(_time) {
+		if (subject.exists()) {
+			subject.set(tweenPerform(_time));
+			if (tweenIsDone()) {
+				done();
+			}
+		} else {
+			state = GMTWERK_STATE.LOST;
+			onLost();
+		}
+	};
+	
+	///@func done()
+	///@desc Mark as done
+	static done = function() {
+		if (state >= GMTWERK_STATE.PAUSED) {
+			subject.set(target);
+			state = GMTWERK_STATE.DONE;
+			onDone();
+		}
+	};
+	
+	///@func stop()
+	///@desc Stop immediately
+	static stop = function() {
+		if (state >= GMTWERK_STATE.PAUSED) {
+			if (snapOnStop) subject.set(target);
+			state = GMTWERK_STATE.STOPPED;
+			onStop();
+		}
+	};
+	
+	// Constructor
+	subject = _subject;
+	source = subject.get();
+	target = _target;
+	snapOnStop = true;
+}
+
+///@func TweenActor(subject, target, time, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int64} time The time to take
+///@desc Actor for normally tweening a value to a target
+function TweenActor(_subject, _target, _time) : BaseTweenActor(_subject, _target) constructor {
+	///@func tweenPerform(time)
+	///@param {real} time Steps (non-delta time) or microseconds (delta time) passed
+	///@desc Per-step action for this tweening actor
+	static tweenPerform = function(_timePassed) {
+		elapsedTime += _timePassed;
+		if (elapsedTime > time) {
+			elapsedTime = time;
+		}
+		if (is_undefined(blend)) {
+			return script_execute(type, source, target, elapsedTime/time);
+		}
+		return script_execute(blend, source, target, script_execute(type, 0, 1, elapsedTime/time));
+	};
+	
+	///@func tweenIsDone()
+	///@desc Return whether this tweening actor is done
+	static tweenIsDone = function() {
+		return elapsedTime >= time;
+	};
+	
+	// Constructor
+	time = _time;
+	type = te_swing;
+	blend = undefined;
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(self, argument[i], argument[i+1]);
+	}
+	time = convertTime(time);
+	elapsedTime = 0;
+}
+
+///@func Tween(subject, target, time, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int64} time The time to take
+///@desc Enqueue and return a new normal tweening actor
+function Tween(_subject, _target, _time) {
+	var actor = new TweenActor(_subject, _target, _time);
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(actor, argument[i], argument[i+1]);
+	}
+	__gmtwerk_insert__(actor);
+	return actor;
+}
+
+///@func ZenosTweenActor(subject, target, fraction, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real} fraction The fraction of the difference to cover per step
+///@desc Actor for fractionally tweening a value to a target
+function ZenosTweenActor(_subject, _target, _fraction) : BaseTweenActor(_subject, _target) constructor {
+	///@func tweenPerform(time)
+	///@param {real} time Steps (non-delta time) or microseconds (delta time) passed
+	///@desc Per-step action for this tweening actor
+	static tweenPerform = function(_timePassed) {
+		if (deltaTime) {
+			var fractionPower = 1-power(1-fraction, _timePassed/game_get_speed(gamespeed_microseconds));
+			latestValue = is_undefined(blend) ? lerp(subject.get(), target, fractionPower) : script_execute(blend, subject.get(), target, fractionPower);
+		} else if (_timePassed == 1) {
+			latestValue = is_undefined(blend) ? lerp(subject.get(), target, fraction) : script_execute(blend, subject.get(), target, fraction);
+		} else {
+			var fractionPower = 1-power(1-fraction, _timePassed)
+			latestValue = is_undefined(blend) ? lerp(subject.get(), target, fractionPower) : script_execute(blend, subject.get(), target, fractionPower);
+		}
+		return latestValue;
+	};
+	
+	///@func tweenIsDone()
+	///@desc Return whether this tweening actor is done
+	static tweenIsDone = function() {
+		return (is_undefined(blend) ? abs(latestValue-target) : script_execute(blend, latestValue, target, undefined)) < tolerance;
+	};
+	
+	// Constructor
+	fraction = _fraction;
+	tolerance = 1;
+	blend = undefined;
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(self, argument[i], argument[i+1]);
+	}
+	latestValue = subject.get();
+}
+
+///@func ZenosTween(subject, target, fraction, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real} fraction The fraction of the difference to cover per step
+///@desc Enqueue and return an actor for fractionally tweening a value to a target
+function ZenosTween(_subject, _target, _fraction) {
+	var actor = new ZenosTweenActor(_subject, _target, _fraction);
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(actor, argument[i], argument[i+1]);
+	}
+	__gmtwerk_insert__(actor);
+	return actor;
+}
+
+///@func StepTweenActor(subject, target, step, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int} step The fixed step size per frame
+///@desc Actor for tweening a value to a target in fixed increments
+function StepTweenActor(_subject, _target, _step) : BaseTweenActor(_subject, _target) constructor {
+	///@func tweenPerform(time)
+	///@param {real} time Steps (non-delta time) or microseconds (delta time) passed
+	///@desc Per-step action for this tweening actor
+	static tweenPerform = function(_timePassed) {
+		var subjectGet = subject.get();
+		var remainingDistance = is_undefined(blend) ? abs(target-subjectGet) : script_execute(blend, subjectGet, target, undefined);
+		var stepMultiple = min(deltaTime ? (_timePassed/game_get_speed(gamespeed_microseconds)) : _timePassed, remainingDistance/step);
+		if (is_undefined(blend)) {
+			latestValue = subjectGet+step*stepMultiple*sign(target-subjectGet);
+		} else {
+			latestValue = script_execute(blend, subjectGet, target, step*stepMultiple/remainingDistance);
+		}
+		if (integerOnly && frac(latestValue) != 0) {
+			latestValue = floor(latestValue);
+		}
+		return latestValue;
+	};
+	
+	///@func tweenIsDone()
+	///@desc Return whether this tweening actor is done
+	static tweenIsDone = function() {
+		return (is_undefined(blend) ? abs(latestValue-target) : script_execute(blend, latestValue, target, undefined)) < step;
+	};
+	
+	// Constructor
+	step = _step;
+	blend = undefined;
+	integerOnly = false;
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(self, argument[i], argument[i+1]);
+	}
+	latestValue = subject.get();
+}
+
+///@func StepTween(subject, target, step, <opts>)
+///@param {GMTwerkSelector} subject The subject selector
+///@param {real|int|colour} target The target value
+///@param {real|int} step The fixed step size per act
+///@desc Enqueue and return an actor for tweening a value to a target in fixed increments
+function StepTween(_subject, _target, _step) {
+	var actor = new StepTweenActor(_subject, _target, _step);
+	for (var i = 3; i < argument_count; i += 2) {
+		variable_struct_set(actor, argument[i], argument[i+1]);
+	}
+	__gmtwerk_insert__(actor);
+	return actor;
+}

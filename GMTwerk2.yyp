@@ -7,6 +7,7 @@
     {"id":{"name":"GMTwerk_classes","path":"scripts/GMTwerk_classes/GMTwerk_classes.yy",},"order":2,},
     {"id":{"name":"GMTwerk_Repeat","path":"scripts/GMTwerk_Repeat/GMTwerk_Repeat.yy",},"order":4,},
     {"id":{"name":"GMTwerk_Delay","path":"scripts/GMTwerk_Delay/GMTwerk_Delay.yy",},"order":3,},
+    {"id":{"name":"gmtk2_test_tween","path":"scripts/gmtk2_test_tween/gmtk2_test_tween.yy",},"order":13,},
     {"id":{"name":"GMTwerk_Itinerary","path":"scripts/GMTwerk_Itinerary/GMTwerk_Itinerary.yy",},"order":9,},
     {"id":{"name":"GMTwerk_ForEach","path":"scripts/GMTwerk_ForEach/GMTwerk_ForEach.yy",},"order":5,},
     {"id":{"name":"GMTwerk_WhenTrue","path":"scripts/GMTwerk_WhenTrue/GMTwerk_WhenTrue.yy",},"order":7,},
@@ -29,6 +30,7 @@
     {"id":{"name":"gmtk2_test_whentrue","path":"scripts/gmtk2_test_whentrue/gmtk2_test_whentrue.yy",},"order":7,},
     {"id":{"name":"gmtk2_test_all","path":"scripts/gmtk2_test_all/gmtk2_test_all.yy",},"order":0,},
     {"id":{"name":"GMTwerk_While","path":"scripts/GMTwerk_While/GMTwerk_While.yy",},"order":6,},
+    {"id":{"name":"GMTwerk_Tween","path":"scripts/GMTwerk_Tween/GMTwerk_Tween.yy",},"order":14,},
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},"order":0,},
   ],
   "Options": [
