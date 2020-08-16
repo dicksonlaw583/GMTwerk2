@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 35;
+maxProgress = 40;
 progressUp = function() {
 	++progress;
 };
@@ -70,6 +70,13 @@ Track(DataUnit(0), DataUnit(5), 800, "onReach", progressUp);
 ZenosTrack(DataUnit(8), DataUnit(0), 0.25, "onReach", progressUp);
 StepTrack(DataUnit(0), DataUnit(room_speed), 1, "onReach", progressUp);
 ChannelTrack(DataUnit(8), DataUnit(0), 800, ac_gmtk2_linear, "onReach", progressUp);
+
+// Twerk (5)
+WaveTwerk(DataUnit(0), 6, 2, 400, "onDone", progressUp);
+FlashTwerk(DataUnit(0), 1, 5, 100, 100, "onDone", progressUp);
+ShakeTwerk(DataUnit(0), 4, 2, 500, "onDone", progressUp);
+ChannelTwerk(DataUnit(0), 7, 4, 200, ac_gmtk2_triangle_wave, "onDone", progressUp);
+DubstepTwerk(DataUnit(0), 8, 3, 300, "onDone", progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;
