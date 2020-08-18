@@ -39,19 +39,19 @@ function gmtk2_test_twerk() {
 	twerker = new ShakeTwerkActor(StructVar("value", listener), 8, 2, int64(4), "decay", te_linear, "onDone", listener.doDone);
 	assert_equal(listener.value, 4, "ShakeTwerk 0");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 7, "ShakeTwerk 1");
+	assert_in_range(listener.value, 1, 7, "ShakeTwerk 1");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 6, "ShakeTwerk 2");
+	assert_in_range(listener.value, 2, 6, "ShakeTwerk 2");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 5, "ShakeTwerk 3");
+	assert_in_range(listener.value, 3, 5, "ShakeTwerk 3");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 8, "ShakeTwerk 4");
+	assert_in_range(listener.value, 0, 8, "ShakeTwerk 4");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 7, "ShakeTwerk 5");
+	assert_in_range(listener.value, 1, 7, "ShakeTwerk 5");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 6, "ShakeTwerk 6");
+	assert_in_range(listener.value, 2, 6, "ShakeTwerk 6");
 	twerker.act(1);
-	assert_in_range(listener.value, 4, 5, "ShakeTwerk 7");
+	assert_in_range(listener.value, 3, 5, "ShakeTwerk 7");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.DONE, 4, true], "ShakeTwerk 8");
 	#endregion

@@ -175,7 +175,7 @@ function ShakeTwerkActor(_subject, _target, _times, _length) : BaseTwerkActor(_s
 	// Constructor
 	time = 0;
 	length = _length;
-	positiveOnly = true;
+	positiveOnly = false;
 	blend = undefined;
 	decay = te_quadratic_out;
 	for (var i = 4; i < argument_count; i += 2) {
