@@ -170,7 +170,7 @@ function GMTwerkArrayIterator(_array) constructor {
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
 function __gmtwerk_insert__(actor) {
 	if (!instance_exists(__gmtwerk_host__)) {
-		instance_create_layer(0, 0, 0, __gmtwerk_host__);
+		instance_create_depth(0, 0, 0, __gmtwerk_host__);
 	}
 	__gmtwerk_host__.__twerks__.add(actor);
 }
