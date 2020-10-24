@@ -22,11 +22,6 @@ function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 	
 	// Convert times
 	time = convertTime(time);
-	
-	// Done on start if time <= 0
-	if (time <= 0) {
-		done();
-	}
 }
 
 ///@func Delay(time, onDone)

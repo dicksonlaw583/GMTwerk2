@@ -31,11 +31,6 @@ function RepeatActor(_interval, _repeats, _onIterate) : GMTwerkActor() construct
 	// Convert times
 	time = convertTime(time);
 	interval = convertTime(interval);
-	
-	// Done on start if repeats <= 0
-	if (repeats <= 0) {
-		done();
-	}
 }
 
 ///@func Repeat(interval, repeats, onIterate)

@@ -18,11 +18,6 @@ function WhenTrueActor(_condition, _onDone) : GMTwerkActor() constructor {
 	for (var i = 2; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
-	
-	// Done on start if condition starts off true
-	if (condition()) {
-		done();
-	}
 }
 
 ///@func WhenTrue(condition, onDone)

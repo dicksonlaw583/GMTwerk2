@@ -33,11 +33,6 @@ function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constru
 	// Convert times
 	time = convertTime(time);
 	interval = convertTime(interval);
-	
-	// Done on start if nothing to iterate
-	if (!iterable.hasNext()) {
-		done();
-	}
 }
 
 ///@func ForEach(interval, iterable, onIterate)

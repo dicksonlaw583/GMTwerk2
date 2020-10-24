@@ -41,11 +41,6 @@ function WhileActor(_interval, _condition, _onIterate) : GMTwerkActor() construc
 	// Convert time
 	time = convertTime(time);
 	interval = convertTime(interval);
-	
-	// Done on start if condition starts off false
-	if (!condition()) {
-		done();
-	}
 }
 
 ///@func While(interval, iterable, onIterate)

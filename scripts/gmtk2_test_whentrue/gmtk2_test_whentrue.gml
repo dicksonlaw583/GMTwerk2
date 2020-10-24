@@ -24,12 +24,4 @@ function gmtk2_test_whentrue() {
 	assert_equal(whentruer.act(1), GMTWERK_STATE.DONE, "WhenTrueActor 3a");
 	assert_equal(subject.dones, 1, "WhenTrueActor 3b");
 	#endregion
-	
-	#region WhenTrueActor no iterations
-	subject.dones = 0;
-	cosubject.ready = true;
-	whentruer = new WhenTrueActor(cosubject.isReady, subject.done);
-	assert_equal(whentruer.state, GMTWERK_STATE.DONE, "WhenTrueActor no iterations 1a");
-	assert_equal(subject.dones, 1, "WhenTrueActor no iterations 1b");
-	#endregion
 }

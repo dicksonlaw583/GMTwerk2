@@ -35,12 +35,4 @@ function gmtk2_test_foreach() {
 	assert_equal(foreacher.act(1), GMTWERK_STATE.DONE, "ForEachActor with iterable4a");
 	assert_equal([subject.lastTrigger, subject.dones], ["bar", 1], "ForEachActor with iterable4b");
 	#endregion
-	
-	#region ForEachActor no iterations
-	subject.lastTrigger = undefined;
-	subject.dones = 0;
-	foreacher = new ForEachActor(int64(2), [], subject.trigger, "onDone", subject.done);
-	assert_equal(foreacher.state, GMTWERK_STATE.DONE, "ForEachActor no iterations 1a");
-	assert_equal([subject.lastTrigger, subject.dones], [undefined, 1], "ForEachActor no iterations 1b");
-	#endregion
 }

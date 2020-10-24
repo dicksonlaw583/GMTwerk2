@@ -16,11 +16,4 @@ function gmtk2_test_delay() {
 	assert_equal(delay.act(1), GMTWERK_STATE.DONE, "DelayActor 3a");
 	assert(subject.triggered, "DelayActor 3b");
 	#endregion
-	
-	#region DelayActor zero time
-	subject.triggered = false;
-	delay = new DelayActor(0, subject.trigger);
-	assert_equal(delay.state, GMTWERK_STATE.DONE, "DelayActor zero time 1a");
-	assert(subject.triggered, "DelayActor zero time 1b");
-	#endregion
 }
