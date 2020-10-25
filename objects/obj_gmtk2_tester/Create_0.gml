@@ -11,7 +11,7 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 
 /** vv Place asynchronous tests here vv **/
 progress = 0;
-maxProgress = 40;
+maxProgress = 43;
 progressUp = function() {
 	++progress;
 };
@@ -77,6 +77,12 @@ FlashTwerk(DataUnit(0), 1, 5, 100, 100, "onDone", progressUp);
 ShakeTwerk(DataUnit(0), 4, 2, 500, "onDone", progressUp);
 ChannelTwerk(DataUnit(0), 7, 4, 200, ac_gmtk2_triangle_wave, "onDone", progressUp);
 DubstepTwerk(DataUnit(0), 8, 3, 300, "onDone", progressUp);
+
+// Workflow (3)
+Workflow([
+	new DelayActor(450, progressUp),
+	new DelayActor(450, progressUp),
+], "onDone", progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;
