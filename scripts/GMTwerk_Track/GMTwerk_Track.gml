@@ -26,7 +26,7 @@ function BaseTrackActor(_subject, _target) : GMTwerkActor() constructor {
 				subject.set(trackPerform(_time));
 				if (trackReached()) {
 					moving = false;
-					subject.set(target.get());
+					subject.set(toValue);
 					onReach();
 				}
 			}
