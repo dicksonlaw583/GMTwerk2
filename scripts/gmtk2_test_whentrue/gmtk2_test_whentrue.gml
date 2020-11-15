@@ -24,4 +24,9 @@ function gmtk2_test_whentrue() {
 	assert_equal(whentruer.act(1), GMTWERK_STATE.DONE, "WhenTrueActor 3a");
 	assert_equal(subject.dones, 1, "WhenTrueActor 3b");
 	#endregion
+	
+	#region WhenTrueActor with fallback onDone
+	whentruer = new WhenTrueActor(cosubject.isReady);
+	assert_is_method(whentruer.onDone, "WhenTrueActor with fallback onDone");
+	#endregion
 }

@@ -15,7 +15,7 @@ function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 	
 	// Constructor
 	time = _time;
-	onDone = _onDone;
+	onDone = is_undefined(_onDone) ? onDone : _onDone;
 	for (var i = 2; i < argument_count; i += 2) {
 		variable_struct_set(self, argument[i], argument[i+1]);
 	}
