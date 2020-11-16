@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "GMTwerk2",
-    "path": "folders/GMTwerk2.yy",
+    "path": "folders/Libraries/GMTwerk2.yy",
   },
   "resourceVersion": "1.0",
   "name": "GMTwerk_selectors",

@@ -26,7 +26,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "GMTwerk2_test",
-    "path": "folders/GMTwerk2_test.yy",
+    "path": "folders/Libraries_test/GMTwerk2_test.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_gmtk2_tester",

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "GMTwerk2_test",
-    "path": "folders/Libraries_test/GMTwerk2_test.yy",
+    "name": "GMAssert",
+    "path": "folders/Libraries_config/GMAssert.yy",
   },
   "resourceVersion": "1.0",
-  "name": "gmtk2_test_twerk",
+  "name": "__GMA_SETTINGS__",
   "tags": [],
   "resourceType": "GMScript",
 }
