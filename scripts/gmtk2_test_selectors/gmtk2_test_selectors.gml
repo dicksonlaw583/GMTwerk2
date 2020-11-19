@@ -2,6 +2,7 @@
 function gmtk2_test_selectors() {
 	var selector, temp;
 	global.__gmtk2_test_selectors_globalvar__ = undefined;
+	global.__gmtk2_test_selectors_globalvar2__ = undefined;
 	
 	#region GlobalVar
 	global.__gmtk2_test_selectors_globalvar__ = "foo";
@@ -12,6 +13,18 @@ function gmtk2_test_selectors() {
 	assert_equal(global.__gmtk2_test_selectors_globalvar__, "bar", "GlobalVar exists result after set");
 	selector = GlobalVar("doesntexist");
 	assert_fail(selector.exists(), "GlobalVar DNE exists");
+	#endregion
+	
+	#region GlobalVec
+	global.__gmtk2_test_selectors_globalvar__ = 100;
+	global.__gmtk2_test_selectors_globalvar2__ = 200;
+	selector = GlobalVec(["__gmtk2_test_selectors_globalvar__", "__gmtk2_test_selectors_globalvar2__"]);
+	assert(selector.exists(), "GlobalVec exists exists");
+	assert_equal(selector.get(), [100, 200], "GlobalVec exists get");
+	assert_is(selector.set([101, 202]), selector, "GlobalVec exists set");
+	assert_equal([global.__gmtk2_test_selectors_globalvar__, global.__gmtk2_test_selectors_globalvar2__], [101, 202], "GlobalVec exists result after set");
+	selector = GlobalVec(["__gmtk2_test_selectors_globalvar__", "doesntexist"]);
+	assert_fail(selector.exists(), "GlobalVec DNE exists");
 	#endregion
 	
 	#region InstanceVar
@@ -28,6 +41,22 @@ function gmtk2_test_selectors() {
 	assert_fail(selector.exists(), "InstanceVar noone exists");
 	#endregion
 	
+	#region InstanceVec
+	xstart = x;
+	ystart = y;
+	selector = InstanceVec(["x", "y"]);
+	assert(selector.exists(), "InstanceVec exists exists");
+	assert_equal(selector.get(), [x, y], "InstanceVec exists get");
+	assert_is(selector.set([x+5, y+6]), selector, "InstanceVec exists set");
+	assert_equal([x, y], [xstart+5, ystart+6], "InstanceVec exists result after set");
+	x = xstart;
+	y = ystart;
+	selector = InstanceVec(["doesntexist", "x"]);
+	assert_fail(selector.exists(), "InstanceVec variable DNE exists");
+	selector = InstanceVec(["x", "y"], noone);
+	assert_fail(selector.exists(), "InstanceVec noone exists");
+	#endregion
+	
 	#region StructVar
 	temp = { foo: 5, bar: 7 };
 	selector = StructVar("foo", temp);
@@ -38,7 +67,20 @@ function gmtk2_test_selectors() {
 	selector = StructVar("baz", temp);
 	assert_fail(selector.exists(), "StructVar variable DNE exists");
 	selector = StructVar("bar", pointer_null);
-	assert_fail(selector.exists(), "StructVar pointer_null exists");	
+	assert_fail(selector.exists(), "StructVar pointer_null exists");
+	#endregion
+	
+	#region StructVec
+	temp = { foo: 5, bar: 7 };
+	selector = StructVec(["foo", "bar"], temp);
+	assert(selector.exists(), "StructVec exists exists");
+	assert_equal(selector.get(), [5, 7], "StructVec exists get");
+	assert_is(selector.set([6, 8]), selector, "StructVec exists set");
+	assert_equal(temp, { foo: 6, bar: 8 }, "StructVec exists result after set");
+	selector = StructVec(["baz", "bar"], temp);
+	assert_fail(selector.exists(), "StructVec variable DNE exists");
+	selector = StructVec(["foo", "bar"], pointer_null);
+	assert_fail(selector.exists(), "StructVec pointer_null exists");
 	#endregion
 	
 	#region ArrayVar

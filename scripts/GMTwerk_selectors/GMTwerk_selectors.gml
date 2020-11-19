@@ -37,6 +37,50 @@ function GlobalVar(name) {
 	return new GlobalVarSelector(name);
 }
 
+///@func GlobalVecSelector(names)
+///@param {string[]} names Array of variable names
+///@desc Selector for multiple global variables
+function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
+	names = _names;
+	dim = array_length(names);
+	
+	///@func exists()
+	///@desc Return whether the target exists
+	static exists = function() {
+		for (var i = dim-1; i >= 0; --i) {
+			if (!variable_global_exists(names[i])) return false;
+		}
+		return true;
+	};
+	
+	///@func get()
+	///@desc Return the target's value
+	static get = function() {
+		var v = array_create(dim);
+		for (var i = dim-1; i >= 0; --i) {
+			v[i] = variable_global_get(names[i]);
+		}
+		return v;
+	};
+	
+	///@func set()
+	///@desc Set the target's value and return self
+	static set = function(val) {
+		for (var i = dim-1; i >= 0; --i) {
+			variable_global_set(names[i], val[i]);
+		}
+		return self;
+	};
+}
+
+///@func GlobalVec(names)
+///@param {string[]} names The variables' names
+///@desc Return a GlobalVecSelector targeting the named global variables
+function GlobalVec(names) {
+	gml_pragma("forceinline");
+	return new GlobalVecSelector(names);
+}
+
 ///@func InstanceVarSelector(name, inst)
 ///@param {string} name The variable's name
 ///@param {id} inst The instance ID of the variable's owner
@@ -74,6 +118,53 @@ function InstanceVar() {
 	return new InstanceVarSelector(argument[0], (argument_count > 1) ? argument[1] : id);
 }
 
+///@func InstanceVecSelector(names)
+///@param {string[]} names Array of variable names
+///@param {id} inst The instance ID of the variable's owner
+///@desc Selector for multiple instance variables
+function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
+	names = _names;
+	dim = array_length(names);
+	inst = _inst;
+	
+	///@func exists()
+	///@desc Return whether the target exists
+	static exists = function() {
+		for (var i = dim-1; i >= 0; --i) {
+			if (!variable_instance_exists(inst, names[i])) return false;
+		}
+		return true;
+	};
+	
+	///@func get()
+	///@desc Return the target's value
+	static get = function() {
+		var v = array_create(dim);
+		for (var i = dim-1; i >= 0; --i) {
+			v[i] = variable_instance_get(inst, names[i]);
+		}
+		return v;
+	};
+	
+	///@func set()
+	///@desc Set the target's value and return self
+	static set = function(val) {
+		for (var i = dim-1; i >= 0; --i) {
+			variable_instance_set(inst, names[i], val[i]);
+		}
+		return self;
+	};
+}
+
+///@func InstanceVec(names)
+///@param {string[]} names The variables' names
+///@param {id} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@desc Return a InstanceVecSelector targeting the named instance variables
+function InstanceVec() {
+	gml_pragma("forceinline");
+	return new InstanceVecSelector(argument[0], (argument_count > 1) ? argument[1] : id);
+}
+
 ///@func StructVarSelector(name, strc)
 ///@param {string} name The targeted struct key
 ///@param {struct} strc The target struct
@@ -109,6 +200,54 @@ function StructVarSelector(_name, _strc) constructor {
 function StructVar(name, strc) {
 	gml_pragma("forceinline");
 	return new StructVarSelector(name, strc);
+}
+
+///@func StructVecSelector(name, strc)
+///@param {string[]} names The targeted struct keys
+///@param {struct} strc The target struct
+///@desc Selector for several values in a struct
+function StructVecSelector(_names, _strc) constructor {
+	names = _names;
+	dim = array_length(names);
+	strc = _strc;
+	
+	///@func exists()
+	///@desc Return whether the target exists
+	static exists = function() {
+		if (!is_struct(strc)) return false;
+		for (var i = dim-1; i >= 0; --i) {
+			if (!variable_struct_exists(strc, names[i])) return false;
+		}
+		return true;
+	};
+	
+	///@func get()
+	///@desc Return the target's value
+	static get = function() {
+		var v = array_create(dim);
+		for (var i = dim-1; i >= 0; --i) {
+			v[i] = variable_struct_get(strc, names[i]);
+		}
+		return v;
+	};
+	
+	///@func set()
+	///@desc Set the target's value and return self
+	static set = function(val) {
+		for (var i = dim-1; i >= 0; --i) {
+			variable_struct_set(strc, names[i], val[i]);
+		}
+		return self;
+	};
+}
+
+///@func StructVec(names, strc)
+///@param {string[]} name The targeted struct keys
+///@param {struct} strc The target struct
+///@desc Return an StructVecSelector targeting the named struct variables
+function StructVec(names, strc) {
+	gml_pragma("forceinline");
+	return new StructVecSelector(names, strc);
 }
 
 ///@func ArrayVarSelector(index, array)
