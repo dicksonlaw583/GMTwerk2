@@ -37,3 +37,23 @@ function tb_angle(angle0, angle1, t) {
 	var _na = angle0+_ad*t;
 	return (_na < 0) ? _na+360 : ((_na >= 360) ? _na-360 : _na);
 }
+
+///@func tb_vector(v0, v1, t)
+///@param v0
+///@param v1
+///@param t
+function tb_vector(v0, v1, t) {
+	var _vdim = array_length(v0);
+	if (is_undefined(t)) {
+		var _vsum = 0;
+		for (var i = _vdim-1; i >= 0; --i) {
+			_vsum += sqr(v0[i]-v1[i]);
+		}
+		return sqrt(_vsum);
+	}
+	var _vout = array_create(_vdim);
+	for (var i = _vdim-1; i >= 0; --i) {
+		_vout[i] = lerp(v0[i], v1[i], t);
+	}
+	return _vout;
+}
