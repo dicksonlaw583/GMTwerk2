@@ -169,8 +169,26 @@ function GMTwerkArrayIterator(_array) constructor {
 ///@param {GMTwerkActor} actor The actor to insert into the main bank
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
 function __gmtwerk_insert__(actor) {
-	if (!instance_exists(__gmtwerk_host__)) {
-		instance_create_depth(0, 0, 0, __gmtwerk_host__);
+	if (id && variable_instance_exists(id, "__gmtwerk_self_host__")) {
+		__gmtwerk_self_host__.add(actor);
+	} else {
+		if (!instance_exists(__gmtwerk_host__)) {
+			instance_create_depth(0, 0, 0, __gmtwerk_host__);
+		}
+		__gmtwerk_host__.__twerks__.add(actor);
 	}
-	__gmtwerk_host__.__twerks__.add(actor);
+}
+
+///@func gmtwerk_host()
+///@desc Mark this instance as self-hosting
+function gmtwerk_host() {
+	__gmtwerk_self_host__ = new GMTwerkBank();
+}
+
+///@func gmtwerk_run(<steps>, <microseconds>)
+///@param {int} <steps>
+///@param {int} <microseconds>
+///@desc Run the self-hosting twerk bank
+function gmtwerk_run(steps, microseconds) {
+	__gmtwerk_self_host__.act(steps, microseconds);
 }
