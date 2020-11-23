@@ -80,8 +80,9 @@ DubstepTwerk(DataUnit(0), 8, 3, 300, "onDone", progressUp);
 
 // Workflow (3)
 Workflow([
-	new DelayActor(450, progressUp),
-	new DelayActor(450, progressUp),
+	function() { return Delay(450, progressUp); },
+	function() { },
+	function() { return Delay(450, progressUp); },
 ], "onDone", progressUp);
 
 // Timeout for asynchronous test is 1 second (plus one step)
