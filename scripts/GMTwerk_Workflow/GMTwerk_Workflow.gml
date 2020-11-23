@@ -31,8 +31,11 @@ function WorkflowActor(_actions) : GMTwerkActor() constructor {
 				break;
 			}
 		} else {
-			++actionNumber;
-			acted = false;
+			if (++actionNumber >= array_length(actions)) {
+				done();
+			} else {
+				acted = false;
+			}
 		}
 	};
 	
