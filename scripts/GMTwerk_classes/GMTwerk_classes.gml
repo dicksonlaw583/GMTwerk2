@@ -104,17 +104,14 @@ function GMTwerkBank() constructor {
 	///@func act(<steps>, <microseconds>)
 	///@param {real} time The amount of time to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
-	static act = function() {
-		// Capture times
-		var steps = (argument_count > 0) ? argument[0] : 1;
-		var microseconds = (argument_count > 1) ? argument[1] : delta_time;
+	static act = function(steps, microseconds) {
 		// For every node in the linked list
 		var previousNode = undefined;
 		var currentNode = _head;
 		while (!is_undefined(currentNode)) {
 			var currentActor = currentNode[0];
 			// If the actor is done already or ended up done after acting, unlink it
-			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(currentActor.deltaTime ? microseconds : steps) <= GMTWERK_STATE.DONE) {
+			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE) {
 				if (is_undefined(previousNode)) {
 					_head = currentNode[1];
 				} else {
