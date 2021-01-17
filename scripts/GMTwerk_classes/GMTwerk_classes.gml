@@ -4,6 +4,7 @@ enum GMTWERK_STATE {
 	DONE = -1,
 	STOPPED = -2,
 	LOST = -3,
+	ORPHANED = -4,
 };
 
 ///@func GMTwerkActor()
@@ -56,7 +57,11 @@ function GMTwerkActor() constructor {
 	///@desc Call onAct if the actor is still live, return the state
 	static act = function(_time) {
 		if (state) {
-			onAct(_time);
+			if (owner == noone || instance_exists(owner)) {
+				onAct(_time);
+			} else {
+				state = GMTWERK_STATE.ORPHANED;
+			}
 		}
 		return state;
 	};
@@ -83,6 +88,7 @@ function GMTwerkActor() constructor {
 	onStop = noop;
 	onDone = noop;
 	onLost = noop;
+	owner = noone;
 	deltaTime = GMTWERK_DEFAULT_TIME_MODE;
 	static onAct = noop; //Overridden by children
 }
@@ -171,6 +177,9 @@ function __gmtwerk_insert__(actor) {
 	} else {
 		if (!instance_exists(__gmtwerk_host__)) {
 			instance_create_depth(0, 0, 0, __gmtwerk_host__);
+		}
+		if (id) {
+			actor.owner = id;
 		}
 		__gmtwerk_host__.__twerks__.add(actor);
 	}
