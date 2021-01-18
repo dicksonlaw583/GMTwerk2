@@ -57,7 +57,7 @@ Itinerary(900, [
 ]);
 
 // LogValue (5)
-LogValue(DataUnit(0), 3, 200, "onLog", progressUp);
+LogValue(DataUnit(0), 3, 200, ["onLog", progressUp]);
 
 // Tween (4)
 Tween(DataUnit(0), 5, 800, "onDone", progressUp);

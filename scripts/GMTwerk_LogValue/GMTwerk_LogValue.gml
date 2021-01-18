@@ -1,7 +1,8 @@
-///@func LogValueActor(subject, size, interval)
+///@func LogValueActor(subject, size, interval, <params>)
 ///@param {GMTwerkSelector} subject The subject to log valuese of
 ///@param {int|infinity} size The size of the log
 ///@param {real|int64} interval The time interval between captures (details below)
+///@param {array} <params> Additional options
 ///@desc GMTwerk actor for logging historical values of a selector
 /**
 Interval options:
@@ -82,9 +83,7 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 	time = _interval;
 	startValue = subject.get();
 	onLog = noop;
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 3) includeParams(argument[3]);
 	
 	// Convert times
 	time = abs(convertTime(time));
@@ -96,10 +95,11 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 	lastValue = startValue;
 }
 
-///@func LogValue(subject, size, interval)
+///@func LogValue(subject, size, interval, <params>)
 ///@param {GMTwerkSelector} subject The subject to log valuese of
 ///@param {int|infinity} size The size of the log
 ///@param {real|int64} interval The time interval between captures (details below)
+///@param {array} <params> Additional options
 ///@desc Enqueue and return a GMTwerk actor for logging historical values of a selector
 /**
 Interval options:
@@ -108,10 +108,7 @@ Interval options:
 - <0: Log subject values periodically, but only upon change.
 **/
 function LogValue(_subject, _size, _interval) {
-	var actor = new LogValueActor(_subject, _size, _interval);
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new LogValueActor(_subject, _size, _interval, (argument_count > 3) ? argument[3] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }

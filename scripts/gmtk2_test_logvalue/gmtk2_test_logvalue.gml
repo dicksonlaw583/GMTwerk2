@@ -8,7 +8,7 @@ function gmtk2_test_logvalue() {
 		lastCalledWith: undefined,
 		call: function(v) { lastCalledWith = v; },
 	};
-	logger = new LogValueActor(selector, 2, int64(2), "startValue", "", "onLog", listener.call);
+	logger = new LogValueActor(selector, 2, int64(2), ["startValue", "", "onLog", listener.call]);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["", "", undefined], "Logger periodic run 0");
 	logger.act(1);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["", "", undefined], "Logger periodic run 1");
@@ -43,7 +43,7 @@ function gmtk2_test_logvalue() {
 		lastCalledWith: undefined,
 		call: function(v) { lastCalledWith = v; },
 	};
-	logger = new LogValueActor(selector, 2, int64(-2), "startValue", "", "onLog", listener.call);
+	logger = new LogValueActor(selector, 2, int64(-2), ["startValue", "", "onLog", listener.call]);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["", "", undefined], "Logger periodic on-change run 0");
 	logger.act(1);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["", "", undefined], "Logger periodic on-change run 1");
@@ -78,7 +78,7 @@ function gmtk2_test_logvalue() {
 		lastCalledWith: undefined,
 		call: function(v) { lastCalledWith = v; },
 	};
-	logger = new LogValueActor(selector, 2, 0, "startValue", "", "onLog", listener.call);
+	logger = new LogValueActor(selector, 2, 0, ["startValue", "", "onLog", listener.call]);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["", "", undefined], "Logger on-change run 0");
 	logger.act(1);
 	assert_equal([logger.get(-1), logger.get(-2), listener.lastCalledWith], ["begin", "", "begin"], "Logger on-change run 1a");
