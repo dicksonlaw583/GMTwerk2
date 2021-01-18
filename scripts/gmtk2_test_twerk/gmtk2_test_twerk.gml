@@ -8,7 +8,7 @@ function gmtk2_test_twerk() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new FlashTwerkActor(StructVar("value", listener), 8, 2, int64(3), int64(2), "onDone", listener.doDone);
+	twerker = new FlashTwerkActor(StructVar("value", listener), 8, 2, int64(3), int64(2), ["onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "FlashTwerk 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 8, false], "FlashTwerk 1");
@@ -36,7 +36,7 @@ function gmtk2_test_twerk() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new ShakeTwerkActor(StructVar("value", listener), 8, 2, int64(4), "decay", te_linear, "onDone", listener.doDone);
+	twerker = new ShakeTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["decay", te_linear, "onDone", listener.doDone]);
 	assert_equal(listener.value, 4, "ShakeTwerk 0");
 	twerker.act(1);
 	assert_in_range(listener.value, 1, 7, "ShakeTwerk 1");
@@ -62,7 +62,7 @@ function gmtk2_test_twerk() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new ChannelTwerkActor(StructVar("value", listener), 8, 2, int64(4), ac_gmtk2_triangle_wave, "onDone", listener.doDone);
+	twerker = new ChannelTwerkActor(StructVar("value", listener), 8, 2, int64(4), ac_gmtk2_triangle_wave, ["onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "ChannelTwerk 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "ChannelTwerk 1");
@@ -88,7 +88,7 @@ function gmtk2_test_twerk() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new DubstepTwerkActor(StructVar("value", listener), 8, 2, int64(4), "forward", te_linear, "backward", te_linear, "onDone", listener.doDone);
+	twerker = new DubstepTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["forward", te_linear, "backward", te_linear, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "DubstepTwerk 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "DubstepTwerk 1");

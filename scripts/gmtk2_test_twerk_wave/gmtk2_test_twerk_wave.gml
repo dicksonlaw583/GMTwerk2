@@ -8,7 +8,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sawtooth, "positiveOnly", true, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sawtooth, "positiveOnly", true, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+ sawtooth wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 5, false], "+ sawtooth wave 1");
@@ -34,7 +34,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sawtooth, "positiveOnly", false, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sawtooth, "positiveOnly", false, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+/- sawtooth wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "+/- sawtooth wave 1");
@@ -60,7 +60,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_triangle, "positiveOnly", true, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_triangle, "positiveOnly", true, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+ triangle wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "+ triangle wave 1");
@@ -86,7 +86,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_triangle, "positiveOnly", false, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_triangle, "positiveOnly", false, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+/- triangle wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 8, false], "+/- triangle wave 1");
@@ -112,7 +112,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sawtooth_reverse, "positiveOnly", true, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sawtooth_reverse, "positiveOnly", true, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+ reverse sawtooth wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 7, false], "+ reverse sawtooth wave 1");
@@ -138,7 +138,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sawtooth_reverse, "positiveOnly", false, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sawtooth_reverse, "positiveOnly", false, "onDone", listener.doDone]);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+/- reverse sawtooth wave 0");
 	twerker.act(1);
 	assert_equal([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "+/- reverse sawtooth wave 1");
@@ -164,7 +164,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sinusoid, "positiveOnly", true, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sinusoid, "positiveOnly", true, "onDone", listener.doDone]);
 	assert_equalish([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+ sinusoid wave 0");
 	twerker.act(1);
 	assert_equalish([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 6, false], "+ sinusoid wave 1");
@@ -190,7 +190,7 @@ function gmtk2_test_twerk_wave() {
 		doDone: function() { done = true; },
 		value: 4
 	};
-	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), "wave", tw_sinusoid, "positiveOnly", false, "onDone", listener.doDone);
+	twerker = new WaveTwerkActor(StructVar("value", listener), 8, 2, int64(4), ["wave", tw_sinusoid, "positiveOnly", false, "onDone", listener.doDone]);
 	assert_equalish([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 4, false], "+/- sinusoid wave 0");
 	twerker.act(1);
 	assert_equalish([twerker.state, listener.value, listener.done], [GMTWERK_STATE.ACTIVE, 8, false], "+/- sinusoid wave 1");

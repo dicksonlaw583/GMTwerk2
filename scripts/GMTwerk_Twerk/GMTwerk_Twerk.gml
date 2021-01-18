@@ -1,4 +1,4 @@
-///@func BaseTwerkActor(subject, target, times, <opts>)
+///@func BaseTwerkActor(subject, target, times)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
@@ -54,11 +54,12 @@ function BaseTwerkActor(_subject, _target, _times) : GMTwerkActor() constructor 
 	snapOnStop = true;
 }
 
-///@func WaveTwerkActor(subject, target, times, wavelength, <opts>)
+///@func WaveTwerkActor(subject, target, times, wavelength, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} wavelength The time to take to return to the start
+///@param {array} <params> Additional options
 ///@desc Actor for moving to and from a target value using a waveform
 function WaveTwerkActor(_subject, _target, _times, _wavelength) : BaseTwerkActor(_subject, _target, _times) constructor {
 	///@func twerkPerform(_time)
@@ -78,33 +79,30 @@ function WaveTwerkActor(_subject, _target, _times, _wavelength) : BaseTwerkActor
 	positiveOnly = true;
 	wave = tw_sinusoid;
 	blend = undefined;
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 4) includeParams(argument[4]);
 	wavelength = convertTime(wavelength);
 }
 
-///@func WaveTwerk(subject, target, times, wavelength, <opts>)
+///@func WaveTwerk(subject, target, times, wavelength, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} wavelength The time to take to return to the start
+///@param {array} <params> Additional options
 ///@desc Enqueue and return the actor for moving to and from a target value using a waveform
 function WaveTwerk(_subject, _target, _times, _wavelength) {
-	var actor = new WaveTwerkActor(_subject, _target, _times, _wavelength);
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new WaveTwerkActor(_subject, _target, _times, _wavelength, (argument_count > 4) ? argument[4] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func FlashTwerkActor(subject, target, times, onTime, offTime, <opts>)
+///@func FlashTwerkActor(subject, target, times, onTime, offTime, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} onTime The time to stay on the target value
 ///@param {real|int64} offTime The time to stay on the original value
+///@param {array} <params> Additional options
 ///@desc Actor for blinking to and from a target value
 function FlashTwerkActor(_subject, _target, _times, _onTime, _offTime) : BaseTwerkActor(_subject, _target, _times) constructor {
 	///@func twerkPerform(_time)
@@ -127,35 +125,32 @@ function FlashTwerkActor(_subject, _target, _times, _onTime, _offTime) : BaseTwe
 	offTime = is_undefined(_offTime) ? _onTime : _offTime;
 	flashOn = true;
 	flashTime = 0;
-	for (var i = 5; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 5) includeParams(argument[5]);
 	onTime = convertTime(onTime);
 	offTime = convertTime(offTime);
 	flashTime = convertTime(flashTime);
 }
 
-///@func FlashTwerk(subject, target, times, onTime, offTime, <opts>)
+///@func FlashTwerk(subject, target, times, onTime, offTime, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} onTime The time to stay on the target value
 ///@param {real|int64} offTime The time to stay on the original value
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for blinking to and from a target value
 function FlashTwerk(_subject, _target, _times, _onTime, _offTime) {
-	var actor = new FlashTwerkActor(_subject, _target, _times, _onTime, _offTime);
-	for (var i = 5; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new FlashTwerkActor(_subject, _target, _times, _onTime, _offTime, (argument_count > 5) ? argument[5] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func ShakeTwerkActor(subject, target, times, length, <opts>)
+///@func ShakeTwerkActor(subject, target, times, length, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of the shake
+///@param {array} <params> Additional options
 ///@desc Actor for shaking a selector's value randomly in a range between the current and target values
 function ShakeTwerkActor(_subject, _target, _times, _length) : BaseTwerkActor(_subject, _target, _times) constructor {
 	///@func twerkPerform(_time)
@@ -178,34 +173,31 @@ function ShakeTwerkActor(_subject, _target, _times, _length) : BaseTwerkActor(_s
 	positiveOnly = false;
 	blend = undefined;
 	decay = te_quadratic_out;
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 4) includeParams(argument[4]);
 	time = convertTime(time);
 	length = convertTime(length);
 }
 
-///@func ShakeTwerk(subject, target, times, length, <opts>)
+///@func ShakeTwerk(subject, target, times, length, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of the shake
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for shaking a selector's value randomly in a range between the current and target values
 function ShakeTwerk(_subject, _target, _times, _length) {
-	var actor = new ShakeTwerkActor(_subject, _target, _times, _length);
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new ShakeTwerkActor(_subject, _target, _times, _length, (argument_count > 4) ? argument[4] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func ChannelTwerkActor(subject, target, times, length, channel, <opts>)
+///@func ChannelTwerkActor(subject, target, times, length, channel, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of one cycle
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {array} <params> Additional options
 ///@desc An actor for animating a value to and from a target value using an animation curve channel
 function ChannelTwerkActor(_subject, _target, _times, _length, _channel) : BaseTwerkActor(_subject, _target, _times) constructor {
 	///@func twerkPerform(_time)
@@ -228,34 +220,31 @@ function ChannelTwerkActor(_subject, _target, _times, _length, _channel) : BaseT
 	y1 = 1;
 	length = _length;
 	blend = undefined;
-	for (var i = 5; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 5) includeParams(argument[5]);
 	time = convertTime(time);
 	length = convertTime(length);
 }
 
-///@func ChannelTwerk(subject, target, times, length, channel, <opts>)
+///@func ChannelTwerk(subject, target, times, length, channel, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of one cycle
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for animating a value to and from a target value using an animation curve channel
 function ChannelTwerk(_subject, _targetValue, _times, _length, _channel) {
-	var actor = new ChannelTwerkActor(_subject, _targetValue, _times, _length, _channel);
-	for (var i = 5; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new ChannelTwerkActor(_subject, _targetValue, _times, _length, _channel, (argument_count > 5) ? argument[5] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func DubstepTwerkActor(subject, target, times, length, <opts>)
+///@func DubstepTwerkActor(subject, target, times, length, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of one cycle
+///@param {array} <params> Additional options
 ///@desc An actor for animating a value to and from a target value using tweening equations
 function DubstepTwerkActor(_subject, _target, _times, _length) : BaseTwerkActor(_subject, _target, _times) constructor {
 	///@func twerkPerform(_time)
@@ -278,24 +267,20 @@ function DubstepTwerkActor(_subject, _target, _times, _length) : BaseTwerkActor(
 	blend = undefined;
 	forward = te_swing;
 	backward = te_swing;
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 4) includeParams(argument[4]);
 	time = convertTime(time);
 	length = convertTime(length);
 }
 
-///@func DubstepTwerk(subject, target, times, length, <opts>)
+///@func DubstepTwerk(subject, target, times, length, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {int} times The number of times to repeat
 ///@param {real|int64} length The duration of one cycle
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for animating a value to and from a target value using tweening equations
 function DubstepTwerk(_subject, _target, _times, _length) {
-	var actor = new DubstepTwerkActor(_subject, _target, _times, _length);
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new DubstepTwerkActor(_subject, _target, _times, _length, (argument_count > 4) ? argument[4] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
