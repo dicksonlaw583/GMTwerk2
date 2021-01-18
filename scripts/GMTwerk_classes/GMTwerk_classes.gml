@@ -82,6 +82,15 @@ function GMTwerkActor() constructor {
 		return _time * (deltaTime ? 1000 : room_speed/1000);
 	};
 	
+	///@func includeParams(params)
+	///@param {array} params Alternating array of parameter names and values
+	///@desc Include the given parameters into the actor
+	static includeParams = function(params) {
+		for (var i = array_length(params)-2; i >= 0; i -= 2) {
+			variable_struct_set(self, params[i], params[i+1]);
+		}
+	};
+	
 	// Constructor
 	state = GMTWERK_STATE.ACTIVE;
 	onPause = noop;
