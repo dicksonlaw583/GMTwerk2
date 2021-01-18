@@ -26,7 +26,7 @@ function gmtk2_test_workflow() {
 		function() { },
 		method({delaySubjects: delaySubjects}, function() { return new DelayActor(int64(3), delaySubjects[1].trigger); }),
 	];
-	workflow = new WorkflowActor(delays, "onDone", subject.trigger);
+	workflow = new WorkflowActor(delays, ["onDone", subject.trigger]);
 	// About to start first delay
 	assert_equal(workflow.act(1), GMTWERK_STATE.ACTIVE, "WorkflowActor 0a");
 	assert_equal([subject.triggered, delaySubjects[0].triggered, delaySubjects[1].triggered], [false, false, false], "WorkflowActor 0b");
@@ -61,11 +61,11 @@ function gmtk2_test_workflow() {
 	delaySubjects[0].triggered = false;
 	delaySubjects[1].triggered = false;
 	delays = [
-		method({delaySubjects: delaySubjects}, function() { return new TweenActor(StructVar("foo", {foo: 0}), 2, int64(2), "onDone", delaySubjects[0].trigger); }),
+		method({delaySubjects: delaySubjects}, function() { return new TweenActor(StructVar("foo", {foo: 0}), 2, int64(2), ["onDone", delaySubjects[0].trigger]); }),
 		function() { },
 		method({delaySubjects: delaySubjects}, function() { return new DelayActor(int64(3), delaySubjects[1].trigger); }),
 	];
-	workflow = new WorkflowActor(delays, "onDone", subject.trigger);
+	workflow = new WorkflowActor(delays, ["onDone", subject.trigger]);
 	assert_equal(workflow.act(1), GMTWERK_STATE.ACTIVE, "WorkflowActor lost 1a");
 	assert_equal([subject.triggered, delaySubjects[0].triggered, delaySubjects[1].triggered], [false, false, false], "WorkflowActor lost 1b");
 	workflow.currentActor.subject.strc = undefined;
@@ -79,11 +79,11 @@ function gmtk2_test_workflow() {
 	delaySubjects[0].triggered = false;
 	delaySubjects[1].triggered = false;
 	delays = [
-		method({delaySubjects: delaySubjects}, function() { return new TweenActor(StructVar("foo", {foo: 0}), 2, int64(2), "onDone", delaySubjects[0].trigger); }),
+		method({delaySubjects: delaySubjects}, function() { return new TweenActor(StructVar("foo", {foo: 0}), 2, int64(2), ["onDone", delaySubjects[0].trigger]); }),
 		function() { },
 		method({delaySubjects: delaySubjects}, function() { return new DelayActor(int64(3), delaySubjects[1].trigger); }),
 	];
-	workflow = new WorkflowActor(delays, "onDone", subject.trigger);
+	workflow = new WorkflowActor(delays, ["onDone", subject.trigger]);
 	assert_equal(workflow.act(1), GMTWERK_STATE.ACTIVE, "WorkflowActor stopped 1a");
 	assert_equal([subject.triggered, delaySubjects[0].triggered, delaySubjects[1].triggered], [false, false, false], "WorkflowActor stopped 1b");
 	workflow.currentActor.stop();

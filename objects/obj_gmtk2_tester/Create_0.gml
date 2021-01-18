@@ -83,7 +83,7 @@ Workflow([
 	function() { return Delay(450, progressUp); },
 	function() { },
 	function() { return Delay(450, progressUp); },
-], "onDone", progressUp);
+], ["onDone", progressUp]);
 
 // Timeout for asynchronous test is 1 second (plus one step)
 alarm[0] = room_speed+1;
