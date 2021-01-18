@@ -11,7 +11,7 @@ function gmtk2_test_foreach() {
 	#region ForEachActor
 	subject.lastTrigger = undefined;
 	subject.dones = 0;
-	foreacher = new ForEachActor(int64(2), ["foo", "bar"], subject.trigger, "onDone", subject.done);
+	foreacher = new ForEachActor(int64(2), ["foo", "bar"], subject.trigger, ["onDone", subject.done]);
 	assert_equal(foreacher.act(1), GMTWERK_STATE.ACTIVE, "ForEachActor 1a");
 	assert_equal([subject.lastTrigger, subject.dones], [undefined, 0], "ForEachActor 1b");
 	assert_equal(foreacher.act(1), GMTWERK_STATE.ACTIVE, "ForEachActor 2a");
@@ -25,7 +25,7 @@ function gmtk2_test_foreach() {
 	#region ForEachActor with iterable
 	subject.lastTrigger = undefined;
 	subject.dones = 0;
-	foreacher = new ForEachActor(int64(2), new GMTwerkArrayIterator(["foo", "bar"]), subject.trigger, "onDone", subject.done);
+	foreacher = new ForEachActor(int64(2), new GMTwerkArrayIterator(["foo", "bar"]), subject.trigger, ["onDone", subject.done]);
 	assert_equal(foreacher.act(1), GMTWERK_STATE.ACTIVE, "ForEachActor with iterable1a");
 	assert_equal([subject.lastTrigger, subject.dones], [undefined, 0], "ForEachActor with iterable1b");
 	assert_equal(foreacher.act(1), GMTWERK_STATE.ACTIVE, "ForEachActor with iterable2a");
