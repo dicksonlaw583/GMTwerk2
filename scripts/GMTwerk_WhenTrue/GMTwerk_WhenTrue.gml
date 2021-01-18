@@ -1,6 +1,7 @@
-///@func WhenTrueActor(condition, onDone)
+///@func WhenTrueActor(condition, onDone, <params>)
 ///@param {method} condition Method that returns true for finishing, false for waiting more
 ///@param {method} onDone Method to perform when the condition becomes true
+///@param {array} <params> Additional options
 ///@desc GMTwerk Actor for responding when a condition becomes true
 function WhenTrueActor(_condition, _onDone) : GMTwerkActor() constructor {
 	///@func onAct()
@@ -15,20 +16,16 @@ function WhenTrueActor(_condition, _onDone) : GMTwerkActor() constructor {
 	// Constructor
 	condition = _condition;
 	onDone = is_undefined(_onDone) ? onDone : _onDone;
-	for (var i = 2; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 2) includeParams(argument[2]);
 }
 
-///@func WhenTrue(condition, onDone)
+///@func WhenTrue(condition, onDone, <params>)
 ///@param {method} condition Method that returns true for finishing, false for waiting more
 ///@param {method} onDone Method to perform when the condition becomes true
+///@param {array} <params> Additional options
 ///@desc Enqueue and return a GMTwerk actor for responding when a condition becomes true
 function WhenTrue(_condition, _onDone) {
-	var actor = new WhenTrueActor(_condition, _onDone);
-	for (var i = 2; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new WhenTrueActor(_condition, _onDone, (argument_count > 2) ? argument[2] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
