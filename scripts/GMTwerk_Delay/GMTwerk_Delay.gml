@@ -1,6 +1,7 @@
-///@func DelayActor(time, onDone)
+///@func DelayActor(time, onDone, <params>)
 ///@param {real|int64} time Time in milliseconds (real) or steps (int64)
 ///@param {method} onDone Method to perform when time elapses
+///@param {array} <params> Additional options
 ///@desc GMTwerk actor for simple time delay
 function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -16,23 +17,19 @@ function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 	// Constructor
 	time = _time;
 	onDone = is_undefined(_onDone) ? onDone : _onDone;
-	for (var i = 2; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 2) includeParams(argument[2]);
 	
 	// Convert times
 	time = convertTime(time);
 }
 
-///@func Delay(time, onDone)
+///@func Delay(time, onDone, <params>)
 ///@param {real|int64} time Time in milliseconds (real) or steps (int64)
 ///@param {method} onDone Method to perform when time elapses
+///@param {array} <params> Additional options
 ///@desc Enqueue and return a GMTwerk actor for simple time delay
 function Delay(_time, _onDone) {
-	var actor = new DelayActor(_time, _onDone);
-	for (var i = 2; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new DelayActor(_time, _onDone, (argument_count > 2) ? argument[2] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
