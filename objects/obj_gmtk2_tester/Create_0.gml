@@ -66,10 +66,10 @@ StepTween(DataUnit(0), room_speed, 1, "onDone", progressUp);
 ChannelTween(DataUnit(8), 0, 800, ac_gmtk2_linear, "onDone", progressUp);
 
 // Track (4)
-Track(DataUnit(0), DataUnit(5), 800, "onReach", progressUp);
-ZenosTrack(DataUnit(8), DataUnit(0), 0.25, "onReach", progressUp);
-StepTrack(DataUnit(0), DataUnit(room_speed), 1, "onReach", progressUp);
-ChannelTrack(DataUnit(8), DataUnit(0), 800, ac_gmtk2_linear, "onReach", progressUp);
+Track(DataUnit(0), DataUnit(5), 800, ["onReach", progressUp]);
+ZenosTrack(DataUnit(8), DataUnit(0), 0.25, ["onReach", progressUp]);
+StepTrack(DataUnit(0), DataUnit(room_speed), 1, ["onReach", progressUp]);
+ChannelTrack(DataUnit(8), DataUnit(0), 800, ac_gmtk2_linear, ["onReach", progressUp]);
 
 // Twerk (5)
 WaveTwerk(DataUnit(0), 6, 2, 400, "onDone", progressUp);
