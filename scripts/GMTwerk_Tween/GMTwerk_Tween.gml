@@ -1,4 +1,4 @@
-///@func BaseTweenActor(subject, target, <opts>)
+///@func BaseTweenActor(subject, target, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@desc Basis for a tweening actor
@@ -45,10 +45,11 @@ function BaseTweenActor(_subject, _target) : GMTwerkActor() constructor {
 	snapOnStop = true;
 }
 
-///@func TweenActor(subject, target, time, <opts>)
+///@func TweenActor(subject, target, time, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int64} time The time to take
+///@param {array} <params> Additional options
 ///@desc Actor for normally tweening a value to a target
 function TweenActor(_subject, _target, _time) : BaseTweenActor(_subject, _target) constructor {
 	///@func tweenPerform(time)
@@ -75,31 +76,28 @@ function TweenActor(_subject, _target, _time) : BaseTweenActor(_subject, _target
 	time = _time;
 	type = te_swing;
 	blend = undefined;
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 3) includeParams(argument[3]);
 	time = convertTime(time);
 	elapsedTime = 0;
 }
 
-///@func Tween(subject, target, time, <opts>)
+///@func Tween(subject, target, time, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int64} time The time to take
+///@param {array} <params> Additional options
 ///@desc Enqueue and return a new normal tweening actor
 function Tween(_subject, _target, _time) {
-	var actor = new TweenActor(_subject, _target, _time);
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new TweenActor(_subject, _target, _time, (argument_count > 3) ? argument[3] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func ZenosTweenActor(subject, target, fraction, <opts>)
+///@func ZenosTweenActor(subject, target, fraction, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real} fraction The fraction of the difference to cover per step
+///@param {array} <params> Additional options
 ///@desc Actor for fractionally tweening a value to a target
 function ZenosTweenActor(_subject, _target, _fraction) : BaseTweenActor(_subject, _target) constructor {
 	///@func tweenPerform(time)
@@ -128,30 +126,27 @@ function ZenosTweenActor(_subject, _target, _fraction) : BaseTweenActor(_subject
 	fraction = _fraction;
 	tolerance = 1;
 	blend = undefined;
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 3) includeParams(argument[3]);
 	latestValue = subject.get();
 }
 
-///@func ZenosTween(subject, target, fraction, <opts>)
+///@func ZenosTween(subject, target, fraction, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real} fraction The fraction of the difference to cover per step
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for fractionally tweening a value to a target
 function ZenosTween(_subject, _target, _fraction) {
-	var actor = new ZenosTweenActor(_subject, _target, _fraction);
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new ZenosTweenActor(_subject, _target, _fraction, (argument_count > 3) ? argument[3] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func StepTweenActor(subject, target, step, <opts>)
+///@func StepTweenActor(subject, target, step, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int} step The fixed step size per frame
+///@param {array} <params> Additional options
 ///@desc Actor for tweening a value to a target in fixed increments
 function StepTweenActor(_subject, _target, _step) : BaseTweenActor(_subject, _target) constructor {
 	///@func tweenPerform(time)
@@ -182,31 +177,28 @@ function StepTweenActor(_subject, _target, _step) : BaseTweenActor(_subject, _ta
 	step = _step;
 	blend = undefined;
 	integerOnly = false;
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 3) includeParams(argument[3]);
 	latestValue = subject.get();
 }
 
-///@func StepTween(subject, target, step, <opts>)
+///@func StepTween(subject, target, step, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int} step The fixed step size per act
+///@param {array} <params> Additional options
 ///@desc Enqueue and return an actor for tweening a value to a target in fixed increments
 function StepTween(_subject, _target, _step) {
-	var actor = new StepTweenActor(_subject, _target, _step);
-	for (var i = 3; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new StepTweenActor(_subject, _target, _step, (argument_count > 3) ? argument[3] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
 
-///@func ChannelTweenActor(subject, target, time, channel, <opts>)
+///@func ChannelTweenActor(subject, target, time, channel, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int64} time The time to take
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {array} <params> Additional options
 ///@desc Actor for tweening a value to a target using the given animation curve channel
 function ChannelTweenActor(_subject, _target, _time, _channel) : BaseTweenActor(_subject, _target) constructor {
 	///@func tweenPerform(time)
@@ -236,24 +228,20 @@ function ChannelTweenActor(_subject, _target, _time, _channel) : BaseTweenActor(
 	y0 = 0;
 	y1 = 1;
 	blend = undefined;
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(self, argument[i], argument[i+1]);
-	}
+	if (argument_count > 4) includeParams(argument[4]);
 	time = convertTime(time);
 	elapsedTime = 0;
 }
 
-///@func ChannelTween(subject, target, time, channel, <opts>)
+///@func ChannelTween(subject, target, time, channel, <params>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {real|int|colour} target The target value
 ///@param {real|int64} time The time to take
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {array} <params> Additional options
 ///@desc Enqueue and return a new curve channel tweening actor
 function ChannelTween(_subject, _target, _time, _channel) {
-	var actor = new ChannelTweenActor(_subject, _target, _time, _channel);
-	for (var i = 4; i < argument_count; i += 2) {
-		variable_struct_set(actor, argument[i], argument[i+1]);
-	}
+	var actor = new ChannelTweenActor(_subject, _target, _time, _channel, (argument_count > 4) ? argument[4] : undefined);
 	__gmtwerk_insert__(actor);
 	return actor;
 }

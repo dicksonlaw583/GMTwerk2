@@ -60,10 +60,10 @@ Itinerary(900, [
 LogValue(DataUnit(0), 3, 200, ["onLog", progressUp]);
 
 // Tween (4)
-Tween(DataUnit(0), 5, 800, "onDone", progressUp);
-ZenosTween(DataUnit(8), 0, 0.25, "onDone", progressUp);
-StepTween(DataUnit(0), room_speed, 1, "onDone", progressUp);
-ChannelTween(DataUnit(8), 0, 800, ac_gmtk2_linear, "onDone", progressUp);
+Tween(DataUnit(0), 5, 800, ["onDone", progressUp]);
+ZenosTween(DataUnit(8), 0, 0.25, ["onDone", progressUp]);
+StepTween(DataUnit(0), room_speed, 1, ["onDone", progressUp]);
+ChannelTween(DataUnit(8), 0, 800, ac_gmtk2_linear, ["onDone", progressUp]);
 
 // Track (4)
 Track(DataUnit(0), DataUnit(5), 800, ["onReach", progressUp]);

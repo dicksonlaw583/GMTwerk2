@@ -12,7 +12,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new TweenActor(selector, 10, int64(2), "type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new TweenActor(selector, 10, int64(2), ["type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "Tween run to completion 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "Tween run to completion 1");
@@ -31,7 +31,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new TweenActor(selector, 12, int64(3), "type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new TweenActor(selector, 12, int64(3), ["type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "Tween stop with snap 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "Tween stop with snap 1");
@@ -50,7 +50,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new TweenActor(selector, 12, int64(3), "type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop, "snapOnStop", false);
+	tweener = new TweenActor(selector, 12, int64(3), ["type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop, "snapOnStop", false]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "Tween stop without snap 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "Tween stop without snap 1");
@@ -69,7 +69,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new TweenActor(selector, 12, int64(3), "type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new TweenActor(selector, 12, int64(3), ["type", te_linear, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "Tween stop with snap 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "Tween stop with snap 1");
@@ -89,7 +89,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new ZenosTweenActor(selector, 0, 0.5, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new ZenosTweenActor(selector, 0, 0.5, ["onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, -4, false, false, false], "ZenosTween run to completion 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, -2, false, false, false], "ZenosTween run to completion 1");
@@ -110,7 +110,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	}
 	selector = StructVar("value", listener);
-	tweener = new StepTweenActor(selector, -2, 1, "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new StepTweenActor(selector, -2, 1, ["onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 1, false, false, false], "StepTween run to completion 0");
 	tweener.act(2);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, -1, false, false, false], "StepTween run to completion 1");
@@ -129,7 +129,7 @@ function gmtk2_test_tween() {
 		doStop: function() { stop = true; },
 	};
 	selector = StructVar("value", listener);
-	tweener = new ChannelTweenActor(selector, 10, int64(2), [ac_gmtk2_linear, 0], "onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop);
+	tweener = new ChannelTweenActor(selector, 10, int64(2), [ac_gmtk2_linear, 0], ["onDone", listener.doDone, "onLost", listener.doLost, "onStop", listener.doStop]);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 6, false, false, false], "ChannelTween run to completion 0");
 	tweener.act(1);
 	assert_equal([tweener.state, listener.value, listener.done, listener.lost, listener.stop], [GMTWERK_STATE.ACTIVE, 8, false, false, false], "ChannelTween run to completion 1");
