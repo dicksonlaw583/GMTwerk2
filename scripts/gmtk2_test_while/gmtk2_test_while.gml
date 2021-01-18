@@ -15,7 +15,7 @@ function gmtk2_test_while() {
 	subject.triggers = 0;
 	subject.dones = 0;
 	cosubject.num = 2;
-	whiler = new WhileActor(int64(2), cosubject.more, cosubject.dec, "onDone", subject.done);
+	whiler = new WhileActor(int64(2), cosubject.more, cosubject.dec, ["onDone", subject.done]);
 	assert_equal(whiler.act(1), GMTWERK_STATE.ACTIVE, "WhileActor 1a");
 	assert_equal([cosubject.num, subject.dones], [2, 0], "WhileActor 1b");
 	assert_equal(whiler.act(1), GMTWERK_STATE.ACTIVE, "WhileActor 2a");
