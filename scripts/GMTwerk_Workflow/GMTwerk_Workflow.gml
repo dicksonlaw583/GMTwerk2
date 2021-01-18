@@ -1,6 +1,6 @@
 ///@func WorkflowActor(actions)
 ///@param {method[]} actions Array of methods to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc GMTwerk actor for one-by-one action sequences
 function WorkflowActor(_actions) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -46,12 +46,12 @@ function WorkflowActor(_actions) : GMTwerkActor() constructor {
 	actionNumber = 0;
 	acted = false;
 	currentActor = undefined;
-	if (argument_count > 1) includeParams(argument[1]);
+	if (argument_count > 1) includeOpts(argument[1]);
 }
 
 ///@func Workflow(actions)
 ///@param {method[]} actions Array of actions to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for one-by-one action sequences
 function Workflow(_actions) {
 	var actor = new WorkflowActor(_actions, (argument_count > 1) ? argument[1] : undefined);

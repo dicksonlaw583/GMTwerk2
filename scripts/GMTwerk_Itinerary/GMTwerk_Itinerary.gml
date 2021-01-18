@@ -1,7 +1,7 @@
-///@func ItineraryActor(time, itinerary, <params>)
+///@func ItineraryActor(time, itinerary, <opts>)
 ///@param {real|int64} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
 ///@param {array|Iterable} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for timeline-like action scheduling
 function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -49,7 +49,7 @@ function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
 	time = _time;
 	countUp = time <= 0;
 	itinerary = is_array(_itinerary) ? new GMTwerkItineraryIterator(_itinerary) : _itinerary;
-	if (argument_count > 2) includeParams(argument[2]);
+	if (argument_count > 2) includeOpts(argument[2]);
 	
 	// Convert times
 	time = convertTime(time);
@@ -109,10 +109,10 @@ function GMTwerkItineraryIterator(_itineraryArray) constructor {
 	}
 }
 
-///@func Itinerary(time, itinerary, <params>)
+///@func Itinerary(time, itinerary, <opts>)
 ///@param {real|int64} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
 ///@param {array|Iterable} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for timeline-like action scheduling
 function Itinerary(_time, _itinerary) {
 	var actor = new ItineraryActor(_time, _itinerary, (argument_count > 2) ? argument[2] : undefined);

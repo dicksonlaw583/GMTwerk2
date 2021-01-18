@@ -13,7 +13,7 @@ function GMTwerkActor() constructor {
 	///@func noop()
 	///@desc Do nothing (placeholder for callbacks)
 	static noop = function() {};
-	
+
 	///@func pause(<p>)
 	///@param {bool} <p> (Optional) true to pause (default), false to unpause.
 	///@desc Pause (set state to inactive) or unpause (set state back to active if not in other inert states)
@@ -27,13 +27,13 @@ function GMTwerkActor() constructor {
 			onPause(false);
 		}
 	};
-	
+
 	///@func unpause()
 	///@desc Alias for pause(false);
 	static unpause = function() {
 		pause(false);
 	};
-	
+
 	///@func stop()
 	///@desc Stop this actor immediately; do not act, and schedule for removal from queue
 	static stop = function() {
@@ -42,7 +42,7 @@ function GMTwerkActor() constructor {
 			onStop();
 		}
 	};
-	
+
 	///@func done()
 	///@desc Mark this actor as done immediately; do not act, and schedule for removal from queue
 	static done = function() {
@@ -51,7 +51,7 @@ function GMTwerkActor() constructor {
 			onDone();
 		}
 	};
-	
+
 	///@func act(time)
 	///@param {real} time Time units passed since last tick
 	///@desc Call onAct if the actor is still live, return the state
@@ -65,7 +65,7 @@ function GMTwerkActor() constructor {
 		}
 		return state;
 	};
-	
+
 	///@func convertTime(time)
 	///@param {real|int64} time
 	///@desc Return the equivalent of the given time in the current time mode's lowest unit of time
@@ -81,16 +81,16 @@ function GMTwerkActor() constructor {
 		// If delta time disabled: Convert to steps figure
 		return _time * (deltaTime ? 1000 : room_speed/1000);
 	};
-	
-	///@func includeParams(params)
-	///@param {array} params Alternating array of parameter names and values
-	///@desc Include the given parameters into the actor
-	static includeParams = function(params) {
+
+	///@func includeOpts(opts)
+	///@param {array} opts Alternating array of parameter names and values
+	///@desc Include the given options into the actor
+	static includeOpts = function(params) {
 		for (var i = array_length(params)-2; i >= 0; i -= 2) {
 			variable_struct_set(self, params[i], params[i+1]);
 		}
 	};
-	
+
 	// Constructor
 	state = GMTWERK_STATE.ACTIVE;
 	onPause = noop;
@@ -107,7 +107,7 @@ function GMTwerkActor() constructor {
 function GMTwerkBank() constructor {
 	_head = undefined;
 	size = 0;
-	
+
 	///@func add(actor)
 	///@param {GMTwerkActor} actor The actor to enqueue
 	///@desc Enqueue the actor into the linked list
@@ -115,7 +115,7 @@ function GMTwerkBank() constructor {
 		_head = [actor, _head];
 		++size;
 	};
-	
+
 	///@func act(<steps>, <microseconds>)
 	///@param {real} time The amount of time to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
@@ -142,7 +142,7 @@ function GMTwerkBank() constructor {
 			currentNode = currentNode[1];
 		}
 	};
-	
+
 	///@func get(n)
 	///@param {int} n
 	///@desc Return the nth item in the linked list
@@ -164,13 +164,13 @@ function GMTwerkArrayIterator(_array) constructor {
 	static hasNext = function() {
 		return index < array_length(array);
 	};
-	
+
 	///@func next()
 	///@desc Go to the next entry of the array
 	static next = function() {
 		value = (++index < array_length(array)) ? array[index] : undefined;
 	};
-	
+
 	// Constructor
 	array = _array;
 	index = 0;

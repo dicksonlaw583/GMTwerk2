@@ -1,8 +1,8 @@
-///@func LogValueActor(subject, size, interval, <params>)
+///@func LogValueActor(subject, size, interval, <opts>)
 ///@param {GMTwerkSelector} subject The subject to log valuese of
 ///@param {int|infinity} size The size of the log
 ///@param {real|int64} interval The time interval between captures (details below)
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc GMTwerk actor for logging historical values of a selector
 /**
 Interval options:
@@ -43,7 +43,7 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 			}
 		}
 	};
-	
+
 	///@func log(<val>)
 	///@param <val> (Optional) The value to log (default: subject selector's value)
 	///@desc Insert the value into the log now
@@ -58,7 +58,7 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 		onLog(val);
 		return self;
 	};
-	
+
 	///@func get(<n>)
 	///@param <n> (Optional) The entry to look up (see legend below) (default: -1)
 	///@desc Return a historical value from the log
@@ -75,7 +75,7 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 		// Finite-sized log: Get wrapped position
 		return _log[(_logPos+clamp(n, -size, size-1)+size) mod size]
 	};
-	
+
 	// Constructor
 	subject = _subject;
 	size = _size;
@@ -83,23 +83,23 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 	time = _interval;
 	startValue = subject.get();
 	onLog = noop;
-	if (argument_count > 3) includeParams(argument[3]);
-	
+	if (argument_count > 3) includeOpts(argument[3]);
+
 	// Convert times
 	time = abs(convertTime(time));
 	interval = convertTime(interval);
-	
+
 	// Start log array if not infinite-sized
 	_log = is_infinity(size) ? [] : array_create(size, startValue);
 	_logPos = 0;
 	lastValue = startValue;
 }
 
-///@func LogValue(subject, size, interval, <params>)
+///@func LogValue(subject, size, interval, <opts>)
 ///@param {GMTwerkSelector} subject The subject to log valuese of
 ///@param {int|infinity} size The size of the log
 ///@param {real|int64} interval The time interval between captures (details below)
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for logging historical values of a selector
 /**
 Interval options:

@@ -1,8 +1,8 @@
-///@func WhileActor(interval, condition, onIterate, <params>)
+///@func WhileActor(interval, condition, onIterate, <opts>)
 ///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
 ///@param {method} condition Method that returns true for continuing, false for stopping
 ///@param {method} onIterate Method to perform upon each repetition
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for periodic time repetitions as long as a condition is true
 function WhileActor(_interval, _condition, _onIterate) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -35,18 +35,18 @@ function WhileActor(_interval, _condition, _onIterate) : GMTwerkActor() construc
 	interval = time;
 	condition = _condition;
 	onIterate = _onIterate;
-	if (argument_count > 3) includeParams(argument[3]);
+	if (argument_count > 3) includeOpts(argument[3]);
 	
 	// Convert time
 	time = convertTime(time);
 	interval = convertTime(interval);
 }
 
-///@func While(interval, iterable, onIterate, <params>)
+///@func While(interval, iterable, onIterate, <opts>)
 ///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
 ///@param {method} condition Method that returns true for continuing, false for stopping
 ///@param {method} onIterate Method to perform upon each repetition
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for periodic time repetitions as long as a condition is true
 function While(_interval, _condition, _onIterate) {
 	var actor = new WhileActor(_interval, _condition, _onIterate, (argument_count > 3) ? argument[3] : undefined);

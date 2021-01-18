@@ -71,11 +71,11 @@ function BaseTrackActor(_subject, _target) : GMTwerkActor() constructor {
 	continuous = false;
 }
 
-///@func TrackActor(subject, target, time, <params>)
+///@func TrackActor(subject, target, time, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int64} time The time to take
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Actor for gradually synchronizing a value to a target
 function TrackActor(_subject, _target, _time) : BaseTrackActor(_subject, _target) constructor {
 	///@func trackPerform(time)
@@ -106,16 +106,16 @@ function TrackActor(_subject, _target, _time) : BaseTrackActor(_subject, _target
 	time = _time;
 	type = te_swing;
 	blend = undefined;
-	if (argument_count > 3) includeParams(argument[3]);
+	if (argument_count > 3) includeOpts(argument[3]);
 	time = convertTime(time);
 	elapsedTime = 0;
 }
 
-///@func Track(subject, target, time, <params>)
+///@func Track(subject, target, time, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int64} time The time to take
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new normal tracking actor
 function Track(_subject, _target, _time) {
 	var actor = new TrackActor(_subject, _target, _time, (argument_count > 3) ? argument[3] : undefined);
@@ -123,11 +123,11 @@ function Track(_subject, _target, _time) {
 	return actor;
 }
 
-///@func ZenosTrackActor(subject, target, fraction, <params>)
+///@func ZenosTrackActor(subject, target, fraction, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real} fraction The fraction of the difference to cover per step
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Actor for fractionally synchronizing a value to a target
 function ZenosTrackActor(_subject, _target, _fraction) : BaseTrackActor(_subject, _target) constructor {
 	///@func trackPerform(time)
@@ -157,15 +157,15 @@ function ZenosTrackActor(_subject, _target, _fraction) : BaseTrackActor(_subject
 	tolerance = 1;
 	blend = undefined;
 	continuous = true;
-	if (argument_count > 3) includeParams(argument[3]);
+	if (argument_count > 3) includeOpts(argument[3]);
 	latestValue = subject.get();
 }
 
-///@func ZenosTrack(subject, target, fraction, <params>)
+///@func ZenosTrack(subject, target, fraction, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real} fraction The fraction of the difference to cover per step
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for fractionally synchronizing a value to a target
 function ZenosTrack(_subject, _target, _fraction) {
 	var actor = new ZenosTrackActor(_subject, _target, _fraction, (argument_count > 3) ? argument[3] : undefined);
@@ -173,11 +173,11 @@ function ZenosTrack(_subject, _target, _fraction) {
 	return actor;
 }
 
-///@func StepTrackActor(subject, target, step, <params>)
+///@func StepTrackActor(subject, target, step, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int} step The fixed step size per frame
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Actor for synchronizing a value to a target by moving in fixed increments
 function StepTrackActor(_subject, _target, _step) : BaseTrackActor(_subject, _target) constructor {
 	///@func trackPerform(time)
@@ -208,15 +208,15 @@ function StepTrackActor(_subject, _target, _step) : BaseTrackActor(_subject, _ta
 	blend = undefined;
 	integerOnly = false;
 	continuous = true;
-	if (argument_count > 3) includeParams(argument[3]);
+	if (argument_count > 3) includeOpts(argument[3]);
 	latestValue = subject.get();
 }
 
-///@func StepTrack(subject, target, step, <params>)
+///@func StepTrack(subject, target, step, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int} step The fixed step size per act
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for synchoronizing a value to a target by moving in fixed increments
 function StepTrack(_subject, _target, _step) {
 	var actor = new StepTrackActor(_subject, _target, _step, (argument_count > 3) ? argument[3] : undefined);
@@ -224,12 +224,12 @@ function StepTrack(_subject, _target, _step) {
 	return actor;
 }
 
-///@func ChannelTrackActor(subject, target, time, channel, <params>)
+///@func ChannelTrackActor(subject, target, time, channel, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int64} time The time to take
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Actor for gradually synchronizing a value to a target using the given animation curve channel
 function ChannelTrackActor(_subject, _target, _time, _channel) : BaseTrackActor(_subject, _target) constructor {
 	///@func trackPerform(time)
@@ -263,17 +263,17 @@ function ChannelTrackActor(_subject, _target, _time, _channel) : BaseTrackActor(
 	y0 = 0;
 	y1 = 1;
 	blend = undefined;
-	if (argument_count > 4) includeParams(argument[4]);
+	if (argument_count > 4) includeOpts(argument[4]);
 	time = convertTime(time);
 	elapsedTime = 0;
 }
 
-///@func ChannelTrack(subject, target, time, channel, <params>)
+///@func ChannelTrack(subject, target, time, channel, <opts>)
 ///@param {GMTwerkSelector} subject The subject selector
 ///@param {GMTwerkSelector} target The target selector
 ///@param {real|int64} time The time to take
 ///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
-///@param {array} <params> Additional options
+///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new curve channel tracking actor
 function ChannelTrack(_subject, _target, _time, _channel) {
 	var actor = new ChannelTrackActor(_subject, _target, _time, _channel, (argument_count > 4) ? argument[4] : undefined);
