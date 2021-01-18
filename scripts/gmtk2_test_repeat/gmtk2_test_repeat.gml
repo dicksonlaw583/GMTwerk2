@@ -11,7 +11,7 @@ function gmtk2_test_repeat() {
 	#region RepeatActor
 	subject.triggers = 0;
 	subject.dones = 0;
-	repeater = new RepeatActor(int64(2), 2, subject.trigger, "onDone", subject.done);
+	repeater = new RepeatActor(int64(2), 2, subject.trigger, ["onDone", subject.done]);
 	assert_equal(repeater.act(1), GMTWERK_STATE.ACTIVE, "RepeatActor 1a");
 	assert_equal([subject.triggers, subject.dones], [0, 0], "RepeatActor 1b");
 	assert_equal(repeater.act(1), GMTWERK_STATE.ACTIVE, "RepeatActor 2a");
