@@ -90,6 +90,9 @@ function GMTwerkActor() constructor {
 			for (var i = array_length(params)-2; i >= 0; i -= 2) {
 				variable_struct_set(self, params[i], params[i+1]);
 			}
+			if (!is_undefined(bank)) {
+				bank.add(self);
+			}
 		}
 	};
 
@@ -100,6 +103,7 @@ function GMTwerkActor() constructor {
 	onDone = noop;
 	onLost = noop;
 	owner = noone;
+	bank = undefined;
 	deltaTime = GMTWERK_DEFAULT_TIME_MODE;
 	static onAct = noop; //Overridden by children
 }
@@ -197,16 +201,18 @@ function GMTwerkArrayIterator(_array) constructor {
 ///@param {GMTwerkActor} actor The actor to insert into the main bank
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
 function __gmtwerk_insert__(actor) {
-	if (id && variable_instance_exists(id, "__gmtwerk_self_host__")) {
-		__gmtwerk_self_host__.add(actor);
-	} else {
-		if (!instance_exists(__gmtwerk_host__)) {
-			instance_create_depth(0, 0, 0, __gmtwerk_host__);
+	if (is_undefined(actor.bank)) {
+		if (id && variable_instance_exists(id, "__gmtwerk_self_host__")) {
+			__gmtwerk_self_host__.add(actor);
+		} else {
+			if (!instance_exists(__gmtwerk_host__)) {
+				instance_create_depth(0, 0, 0, __gmtwerk_host__);
+			}
+			if (id) {
+				actor.owner = id;
+			}
+			__gmtwerk_host__.__twerks__.add(actor);
 		}
-		if (id) {
-			actor.owner = id;
-		}
-		__gmtwerk_host__.__twerks__.add(actor);
 	}
 }
 
