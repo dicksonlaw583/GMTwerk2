@@ -122,26 +122,40 @@ function GMTwerkBank() constructor {
 	///@param {real} time The amount of time to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
 	static act = function(steps, microseconds) {
+		var needCleanup = false;
 		// For every node in the linked list
 		var previousNode = undefined;
 		var currentNode = _head;
 		while (!is_undefined(currentNode)) {
+			// Act
 			var currentActor = currentNode[0];
-			// If the actor is done already or ended up done after acting, unlink it
-			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE) {
-				if (is_undefined(previousNode)) {
-					_head = currentNode[1];
-				} else {
-					previousNode[@1] = currentNode[1];
-				}
-				--size;
-			}
-			// Otherwise, keep it anchored in the list
-			else {
-				previousNode = currentNode;
-			}
+			needCleanup = currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE || needCleanup;
 			// Go to next
 			currentNode = currentNode[1];
+		}
+		// Clean finished nodes if any new ones cropped up
+		if (needCleanup) {
+			previousNode = undefined;
+			currentNode = _head;
+			// For every node in the linked list
+			while (!is_undefined(currentNode)) {
+				// If the actor is done already or ended up done after acting, unlink it
+				var currentActor = currentNode[0];
+				if (currentActor.state <= GMTWERK_STATE.DONE) {
+					if (_head == currentNode) {
+						_head = currentNode[1];
+					} else {
+						previousNode[@1] = currentNode[1];
+					}
+					--size;
+				}
+				// Otherwise, keep it anchored in the list
+				else {
+					previousNode = currentNode;
+				}
+				// Go to next
+				currentNode = currentNode[1];
+			}
 		}
 	};
 
