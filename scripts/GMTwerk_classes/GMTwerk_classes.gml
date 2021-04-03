@@ -86,8 +86,10 @@ function GMTwerkActor() constructor {
 	///@param {array} opts Alternating array of parameter names and values
 	///@desc Include the given options into the actor
 	static includeOpts = function(params) {
-		for (var i = array_length(params)-2; i >= 0; i -= 2) {
-			variable_struct_set(self, params[i], params[i+1]);
+		if (is_array(params)) { // BUGFIX: 2.3.2.420 - Catch argument_count failure
+			for (var i = array_length(params)-2; i >= 0; i -= 2) {
+				variable_struct_set(self, params[i], params[i+1]);
+			}
 		}
 	};
 
