@@ -86,8 +86,13 @@ function GMTwerkActor() constructor {
 	///@param {array} opts Alternating array of parameter names and values
 	///@desc Include the given options into the actor
 	static includeOpts = function(params) {
-		for (var i = array_length(params)-2; i >= 0; i -= 2) {
-			variable_struct_set(self, params[i], params[i+1]);
+		if (is_array(params)) { // BUGFIX: 2.3.2.420 - Catch argument_count failure
+			for (var i = array_length(params)-2; i >= 0; i -= 2) {
+				variable_struct_set(self, params[i], params[i+1]);
+			}
+			if (!is_undefined(bank)) {
+				bank.add(self);
+			}
 		}
 	};
 
@@ -98,6 +103,7 @@ function GMTwerkActor() constructor {
 	onDone = noop;
 	onLost = noop;
 	owner = noone;
+	bank = undefined;
 	deltaTime = GMTWERK_DEFAULT_TIME_MODE;
 	static onAct = noop; //Overridden by children
 }
@@ -120,26 +126,40 @@ function GMTwerkBank() constructor {
 	///@param {real} time The amount of time to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
 	static act = function(steps, microseconds) {
+		var needCleanup = false;
 		// For every node in the linked list
 		var previousNode = undefined;
 		var currentNode = _head;
 		while (!is_undefined(currentNode)) {
+			// Act
 			var currentActor = currentNode[0];
-			// If the actor is done already or ended up done after acting, unlink it
-			if (currentActor.state <= GMTWERK_STATE.DONE || currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE) {
-				if (is_undefined(previousNode)) {
-					_head = currentNode[1];
-				} else {
-					previousNode[@1] = currentNode[1];
-				}
-				--size;
-			}
-			// Otherwise, keep it anchored in the list
-			else {
-				previousNode = currentNode;
-			}
+			needCleanup = currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE || needCleanup;
 			// Go to next
 			currentNode = currentNode[1];
+		}
+		// Clean finished nodes if any new ones cropped up
+		if (needCleanup) {
+			previousNode = undefined;
+			currentNode = _head;
+			// For every node in the linked list
+			while (!is_undefined(currentNode)) {
+				// If the actor is done already or ended up done after acting, unlink it
+				var currentActor = currentNode[0];
+				if (currentActor.state <= GMTWERK_STATE.DONE) {
+					if (_head == currentNode) {
+						_head = currentNode[1];
+					} else {
+						previousNode[@1] = currentNode[1];
+					}
+					--size;
+				}
+				// Otherwise, keep it anchored in the list
+				else {
+					previousNode = currentNode;
+				}
+				// Go to next
+				currentNode = currentNode[1];
+			}
 		}
 	};
 
@@ -181,16 +201,18 @@ function GMTwerkArrayIterator(_array) constructor {
 ///@param {GMTwerkActor} actor The actor to insert into the main bank
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
 function __gmtwerk_insert__(actor) {
-	if (id && variable_instance_exists(id, "__gmtwerk_self_host__")) {
-		__gmtwerk_self_host__.add(actor);
-	} else {
-		if (!instance_exists(__gmtwerk_host__)) {
-			instance_create_depth(0, 0, 0, __gmtwerk_host__);
+	if (is_undefined(actor.bank)) {
+		if (id && variable_instance_exists(id, "__gmtwerk_self_host__")) {
+			__gmtwerk_self_host__.add(actor);
+		} else {
+			if (!instance_exists(__gmtwerk_host__)) {
+				instance_create_depth(0, 0, 0, __gmtwerk_host__);
+			}
+			if (id) {
+				actor.owner = id;
+			}
+			__gmtwerk_host__.__twerks__.add(actor);
 		}
-		if (id) {
-			actor.owner = id;
-		}
-		__gmtwerk_host__.__twerks__.add(actor);
 	}
 }
 

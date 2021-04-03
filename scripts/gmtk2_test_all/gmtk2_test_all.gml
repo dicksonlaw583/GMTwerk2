@@ -20,6 +20,7 @@ function gmtk2_test_all() {
 	gmtk2_test_twerk_wave();
 	gmtk2_test_twerk();
 	gmtk2_test_workflow();
+	gmtk2_test_bugs();
 	/** ^^ Place tests here ^^ **/
 	
 	var timeB = current_time;

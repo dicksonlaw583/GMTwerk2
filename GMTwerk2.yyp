@@ -27,6 +27,7 @@
     {"id":{"name":"GMTwerk_LogValue","path":"scripts/GMTwerk_LogValue/GMTwerk_LogValue.yy",},"order":11,},
     {"id":{"name":"gmtk2_test_whentoggle","path":"scripts/gmtk2_test_whentoggle/gmtk2_test_whentoggle.yy",},"order":8,},
     {"id":{"name":"obj_gmtk2_tester","path":"objects/obj_gmtk2_tester/obj_gmtk2_tester.yy",},"order":1,},
+    {"id":{"name":"gmtk2_test_bugs","path":"scripts/gmtk2_test_bugs/gmtk2_test_bugs.yy",},"order":21,},
     {"id":{"name":"GMTwerk_twerk_waves","path":"scripts/GMTwerk_twerk_waves/GMTwerk_twerk_waves.yy",},"order":17,},
     {"id":{"name":"gmtk2_test_while","path":"scripts/gmtk2_test_while/gmtk2_test_while.yy",},"order":6,},
     {"id":{"name":"gmtk2_test_basics","path":"scripts/gmtk2_test_basics/gmtk2_test_basics.yy",},"order":3,},
@@ -84,7 +85,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.1.542",
+    "IDEVersion": "2.3.2.556",
   },
   "resourceVersion": "1.4",
   "name": "GMTwerk2",
