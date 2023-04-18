@@ -1,7 +1,7 @@
 ///@func LogValueActor(subject, size, interval, <opts>)
-///@param {GMTwerkSelector} subject The subject to log valuese of
-///@param {int|infinity} size The size of the log
-///@param {real|int64} interval The time interval between captures (details below)
+///@param {Struct.GMTwerkSelector} subject The subject to log valuese of
+///@param {Real} size The size of the log
+///@param {Real} interval The time interval between captures (details below)
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk actor for logging historical values of a selector
 /**
@@ -96,9 +96,9 @@ function LogValueActor(_subject, _size, _interval) : GMTwerkActor() constructor 
 }
 
 ///@func LogValue(subject, size, interval, <opts>)
-///@param {GMTwerkSelector} subject The subject to log valuese of
-///@param {int|infinity} size The size of the log
-///@param {real|int64} interval The time interval between captures (details below)
+///@param {Struct.GMTwerkSelector} subject The subject to log valuese of
+///@param {Real} size The size of the log
+///@param {Real} interval The time interval between captures (details below)
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for logging historical values of a selector
 /**

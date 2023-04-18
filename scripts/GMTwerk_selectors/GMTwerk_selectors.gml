@@ -1,9 +1,9 @@
-///@func GMTwerkSelector()
+///@class GMTwerkSelector()
 ///@desc Base class for all selectors
 function GMTwerkSelector() constructor {
 }
 
-///@func GlobalVarSelector(name)
+///@class GlobalVarSelector(name)
 ///@param {string} name The variable's name
 ///@desc Selector for a global variable
 function GlobalVarSelector(_name) : GMTwerkSelector() constructor {
@@ -31,14 +31,16 @@ function GlobalVarSelector(_name) : GMTwerkSelector() constructor {
 
 ///@func GlobalVar(name)
 ///@param {string} name The variable's name
+///@return {Struct.GlobalVarSelector}
+///@pure
 ///@desc Return a GlobalVarSelector targeting the named global variable
 function GlobalVar(name) {
 	gml_pragma("forceinline");
 	return new GlobalVarSelector(name);
 }
 
-///@func GlobalVecSelector(names)
-///@param {string[]} names Array of variable names
+///@class GlobalVecSelector(names)
+///@param {Array<String>} names Array of variable names
 ///@desc Selector for multiple global variables
 function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
 	names = _names;
@@ -74,16 +76,18 @@ function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
 }
 
 ///@func GlobalVec(names)
-///@param {string[]} names The variables' names
+///@param {Array<String>} names The variables' names
+///@return {Struct.GlobalVecSelector}
+///@pure
 ///@desc Return a GlobalVecSelector targeting the named global variables
 function GlobalVec(names) {
 	gml_pragma("forceinline");
 	return new GlobalVecSelector(names);
 }
 
-///@func InstanceVarSelector(name, inst)
+///@class InstanceVarSelector(name, inst)
 ///@param {string} name The variable's name
-///@param {id} inst The instance ID of the variable's owner
+///@param {Id.Instance} inst The instance ID of the variable's owner
 ///@desc Selector for an instance variable
 function InstanceVarSelector(_name, _inst) : GMTwerkSelector() constructor {
 	name = _name;
@@ -111,16 +115,18 @@ function InstanceVarSelector(_name, _inst) : GMTwerkSelector() constructor {
 
 ///@func InstanceVar(name, <inst>)
 ///@param {string} name The variable's name
-///@param {id} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@param {Id.Instance} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@return {Struct.InstanceVarSelector}
+///@pure
 ///@desc Return an InstanceVarSelector targeting the named instance variable
 function InstanceVar() {
 	gml_pragma("forceinline");
 	return new InstanceVarSelector(argument[0], (argument_count > 1) ? argument[1] : id);
 }
 
-///@func InstanceVecSelector(names)
-///@param {string[]} names Array of variable names
-///@param {id} inst The instance ID of the variable's owner
+///@class InstanceVecSelector(names)
+///@param {Array<String>} names Array of variable names
+///@param {Id.Instance} inst The instance ID of the variable's owner
 ///@desc Selector for multiple instance variables
 function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
 	names = _names;
@@ -157,15 +163,17 @@ function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
 }
 
 ///@func InstanceVec(names)
-///@param {string[]} names The variables' names
-///@param {id} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@param {Array<String>} names The variables' names
+///@param {Id.Instance} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@return {Struct.InstanceVecSelector}
+///@pure
 ///@desc Return a InstanceVecSelector targeting the named instance variables
 function InstanceVec() {
 	gml_pragma("forceinline");
 	return new InstanceVecSelector(argument[0], (argument_count > 1) ? argument[1] : id);
 }
 
-///@func StructVarSelector(name, strc)
+///@class StructVarSelector(name, strc)
 ///@param {string} name The targeted struct key
 ///@param {struct} strc The target struct
 ///@desc Selector for a value in a struct
@@ -196,14 +204,16 @@ function StructVarSelector(_name, _strc) constructor {
 ///@func StructVar(name, strc)
 ///@param {string} name The targeted struct key
 ///@param {struct} strc The target struct
+///@return {Struct.StructVarSelector}
+///@pure
 ///@desc Return an StructVarSelector targeting the named struct variable
 function StructVar(name, strc) {
 	gml_pragma("forceinline");
 	return new StructVarSelector(name, strc);
 }
 
-///@func StructVecSelector(name, strc)
-///@param {string[]} names The targeted struct keys
+///@class StructVecSelector(name, strc)
+///@param {Array<String>} names The targeted struct keys
 ///@param {struct} strc The target struct
 ///@desc Selector for several values in a struct
 function StructVecSelector(_names, _strc) constructor {
@@ -242,16 +252,18 @@ function StructVecSelector(_names, _strc) constructor {
 }
 
 ///@func StructVec(names, strc)
-///@param {string[]} name The targeted struct keys
+///@param {Array<String>} name The targeted struct keys
 ///@param {struct} strc The target struct
+///@return {Struct.StructVecSelector}
+///@pure
 ///@desc Return an StructVecSelector targeting the named struct variables
 function StructVec(names, strc) {
 	gml_pragma("forceinline");
 	return new StructVecSelector(names, strc);
 }
 
-///@func ArrayVarSelector(index, array)
-///@param {int} index The targeted position in the array
+///@class ArrayVarSelector(index, array)
+///@param {Real} index The targeted position in the array
 ///@param {array} array The targeted array
 ///@desc Selector for a value in an array
 function ArrayVarSelector(_index, _array) constructor {
@@ -279,15 +291,17 @@ function ArrayVarSelector(_index, _array) constructor {
 }
 
 ///@func ArrayVar(index, array)
-///@param {int} index The targeted position in the array
+///@param {Real} index The targeted position in the array
 ///@param {array} array The targeted array
+///@return {Struct.ArrayVarSelector}
+///@pure
 ///@desc Return an ArrayVarSelector targeting the position in the given array
 function ArrayVar(index, array) {
 	gml_pragma("forceinline");
 	return new ArrayVarSelector(index, array);
 }
 
-///@func DataUnitSelector(data)
+///@class DataUnitSelector(data)
 ///@param data The starting data value
 ///@desc Selector for a placeholder value
 function DataUnitSelector(_data) : GMTwerkSelector() constructor {
@@ -315,6 +329,8 @@ function DataUnitSelector(_data) : GMTwerkSelector() constructor {
 
 ///@func DataUnit(data)
 ///@param data The starting data value
+///@return {Struct.DataUnitSelector}
+///@pure
 ///@desc Return a DataUnitSelector for a placeholder value
 function DataUnit(data) {
 	gml_pragma("forceinline");

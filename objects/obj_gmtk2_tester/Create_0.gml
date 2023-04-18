@@ -12,11 +12,15 @@ layer_background_blend(layer_background_get_id(layer_get_id("Background")), (fai
 /** vv Place asynchronous tests here vv **/
 elapsed = {
 	total: function() {
+		///Feather disable GM1041
 		var keys = variable_struct_get_names(self);
+		///Feather enable GM1041
 		var _sum = 0;
 		for (var i = array_length(keys)-1; i >= 0; --i) {
 			var key = keys[i];
+			///Feather disable GM1041
 			var value = variable_struct_get(self, key);
+			///Feather enable GM1041
 			if (is_method(value)) continue;
 			_sum += value;
 		}
@@ -98,7 +102,7 @@ progressTween = function() {
 };
 Tween(DataUnit(0), 5, 800, ["onDone", progressTween]);
 ZenosTween(DataUnit(8), 0, 0.25, ["onDone", progressTween]);
-StepTween(DataUnit(0), room_speed, 1, ["onDone", progressTween]);
+StepTween(DataUnit(0), game_get_speed(gamespeed_fps), 1, ["onDone", progressTween]);
 ChannelTween(DataUnit(8), 0, 800, ac_gmtk2_linear, ["onDone", progressTween]);
 
 // Track (4)
@@ -108,7 +112,7 @@ progressTrack = function() {
 };
 Track(DataUnit(0), DataUnit(5), 800, ["onReach", progressTrack]);
 ZenosTrack(DataUnit(8), DataUnit(0), 0.25, ["onReach", progressTrack]);
-StepTrack(DataUnit(0), DataUnit(room_speed), 1, ["onReach", progressTrack]);
+StepTrack(DataUnit(0), DataUnit(game_get_speed(gamespeed_fps)), 1, ["onReach", progressTrack]);
 ChannelTrack(DataUnit(8), DataUnit(0), 800, ac_gmtk2_linear, ["onReach", progressTrack]);
 
 // Twerk (5)
@@ -134,7 +138,7 @@ Workflow([
 ], ["onDone", progressWorkflow]);
 
 // Timeout for asynchronous test is 1 second (plus one step)
-alarm[0] = room_speed+1;
+alarm[0] = game_get_speed(gamespeed_fps)+1;
 
 // Calculate max progress
 maxElapsed = elapsed.total();

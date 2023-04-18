@@ -67,7 +67,7 @@ function GMTwerkActor() constructor {
 	};
 
 	///@func convertTime(time)
-	///@param {real|int64} time
+	///@param {Real} time
 	///@desc Return the equivalent of the given time in the current time mode's lowest unit of time
 	static convertTime = function(_time) {
 		// int64: Treat as lowest denominator of current time mode
@@ -79,7 +79,7 @@ function GMTwerkActor() constructor {
 		// real: Treat as millisecond figure.
 		// If delta time enabled: Convert to microsecond figure
 		// If delta time disabled: Convert to steps figure
-		return _time * (deltaTime ? 1000 : room_speed/1000);
+		return _time * (deltaTime ? 1000 : game_get_speed(gamespeed_fps)/1000);
 	};
 
 	///@func includeOpts(opts)
@@ -115,7 +115,7 @@ function GMTwerkBank() constructor {
 	size = 0;
 
 	///@func add(actor)
-	///@param {GMTwerkActor} actor The actor to enqueue
+	///@param {Struct.GMTwerkActor} actor The actor to enqueue
 	///@desc Enqueue the actor into the linked list
 	static add = function(actor) {
 		_head = [actor, _head];
@@ -164,7 +164,7 @@ function GMTwerkBank() constructor {
 	};
 
 	///@func get(n)
-	///@param {int} n
+	///@param {Real} n
 	///@desc Return the nth item in the linked list
 	static get = function(n) {
 		var currentNode = _head;
@@ -198,7 +198,7 @@ function GMTwerkArrayIterator(_array) constructor {
 }
 
 ///@func __gmtwerk_insert__(actor)
-///@param {GMTwerkActor} actor The actor to insert into the main bank
+///@param {Struct.GMTwerkActor} actor The actor to insert into the main bank
 ///@desc Insert an actor into the main bank, creating the daemon if it doesn't exist already
 function __gmtwerk_insert__(actor) {
 	if (is_undefined(actor.bank)) {
@@ -223,8 +223,8 @@ function gmtwerk_host() {
 }
 
 ///@func gmtwerk_run(<steps>, <microseconds>)
-///@param {int} <steps>
-///@param {int} <microseconds>
+///@param {Real} <steps>
+///@param {Real} <microseconds>
 ///@desc Run the self-hosting twerk bank
 function gmtwerk_run(steps, microseconds) {
 	__gmtwerk_self_host__.act(steps, microseconds);

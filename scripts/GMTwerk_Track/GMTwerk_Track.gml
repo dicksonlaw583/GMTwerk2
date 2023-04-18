@@ -1,6 +1,6 @@
 ///@func BaseTrackActor(subject, target)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
 ///@desc Basis for a synchronizing a selector with another
 function BaseTrackActor(_subject, _target) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -72,9 +72,9 @@ function BaseTrackActor(_subject, _target) : GMTwerkActor() constructor {
 }
 
 ///@func TrackActor(subject, target, time, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int64} time The time to take
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} time The time to take
 ///@param {array} <opts> Additional options
 ///@desc Actor for gradually synchronizing a value to a target
 function TrackActor(_subject, _target, _time) : BaseTrackActor(_subject, _target) constructor {
@@ -112,9 +112,9 @@ function TrackActor(_subject, _target, _time) : BaseTrackActor(_subject, _target
 }
 
 ///@func Track(subject, target, time, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int64} time The time to take
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} time The time to take
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new normal tracking actor
 function Track(_subject, _target, _time) {
@@ -124,8 +124,8 @@ function Track(_subject, _target, _time) {
 }
 
 ///@func ZenosTrackActor(subject, target, fraction, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
 ///@param {real} fraction The fraction of the difference to cover per step
 ///@param {array} <opts> Additional options
 ///@desc Actor for fractionally synchronizing a value to a target
@@ -162,8 +162,8 @@ function ZenosTrackActor(_subject, _target, _fraction) : BaseTrackActor(_subject
 }
 
 ///@func ZenosTrack(subject, target, fraction, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
 ///@param {real} fraction The fraction of the difference to cover per step
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for fractionally synchronizing a value to a target
@@ -174,9 +174,9 @@ function ZenosTrack(_subject, _target, _fraction) {
 }
 
 ///@func StepTrackActor(subject, target, step, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int} step The fixed step size per frame
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} step The fixed step size per frame
 ///@param {array} <opts> Additional options
 ///@desc Actor for synchronizing a value to a target by moving in fixed increments
 function StepTrackActor(_subject, _target, _step) : BaseTrackActor(_subject, _target) constructor {
@@ -213,9 +213,9 @@ function StepTrackActor(_subject, _target, _step) : BaseTrackActor(_subject, _ta
 }
 
 ///@func StepTrack(subject, target, step, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int} step The fixed step size per act
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} step The fixed step size per act
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for synchoronizing a value to a target by moving in fixed increments
 function StepTrack(_subject, _target, _step) {
@@ -225,10 +225,10 @@ function StepTrack(_subject, _target, _step) {
 }
 
 ///@func ChannelTrackActor(subject, target, time, channel, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int64} time The time to take
-///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} time The time to take
+///@param {Struct.AnimCurveChannel,Array,Asset.GMAnimCurve} channel The animation curve channel to use for tweening values
 ///@param {array} <opts> Additional options
 ///@desc Actor for gradually synchronizing a value to a target using the given animation curve channel
 function ChannelTrackActor(_subject, _target, _time, _channel) : BaseTrackActor(_subject, _target) constructor {
@@ -269,10 +269,10 @@ function ChannelTrackActor(_subject, _target, _time, _channel) : BaseTrackActor(
 }
 
 ///@func ChannelTrack(subject, target, time, channel, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {GMTwerkSelector} target The target selector
-///@param {real|int64} time The time to take
-///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Struct.GMTwerkSelector} target The target selector
+///@param {Real} time The time to take
+///@param {Struct.AnimCurveChannel,Array,Asset.GMAnimCurve} channel The animation curve channel to use for tweening values
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new curve channel tracking actor
 function ChannelTrack(_subject, _target, _time, _channel) {

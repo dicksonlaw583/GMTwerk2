@@ -1,7 +1,7 @@
 ///@func ForEachActor(interval, iterable, onIterate, <opts>)
-///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
-///@param {array|Iterable} iterable An array or a struct implementing hasNext() and next()
-///@param {method} onIterate Method to perform upon each repetition (will be given value and index)
+///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
+///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
+///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for periodic time repetitions over an array or an Iterable
 function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constructor {
@@ -35,9 +35,9 @@ function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constru
 }
 
 ///@func ForEach(interval, iterable, onIterate, <opts>)
-///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
-///@param {array|Iterable} iterable An array or a struct implementing hasNext() and next()
-///@param {method} onIterate Method to perform upon each repetition (will be given value and index)
+///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
+///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
+///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for periodic time repetitions over an array or an Iterable
 function ForEach(_interval, _iterable, _onIterate) {

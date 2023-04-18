@@ -1,6 +1,6 @@
 ///@func WhenTrueActor(condition, onDone, <opts>)
-///@param {method} condition Method that returns true for finishing, false for waiting more
-///@param {method} onDone Method to perform when the condition becomes true
+///@param {Function} condition Method that returns true for finishing, false for waiting more
+///@param {Function} onDone Method to perform when the condition becomes true
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for responding when a condition becomes true
 function WhenTrueActor(_condition, _onDone) : GMTwerkActor() constructor {
@@ -20,8 +20,8 @@ function WhenTrueActor(_condition, _onDone) : GMTwerkActor() constructor {
 }
 
 ///@func WhenTrue(condition, onDone, <opts>)
-///@param {method} condition Method that returns true for finishing, false for waiting more
-///@param {method} onDone Method to perform when the condition becomes true
+///@param {Function} condition Method that returns true for finishing, false for waiting more
+///@param {Function} onDone Method to perform when the condition becomes true
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for responding when a condition becomes true
 function WhenTrue(_condition, _onDone) {

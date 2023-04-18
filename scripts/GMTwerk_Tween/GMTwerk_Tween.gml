@@ -1,6 +1,6 @@
 ///@func BaseTweenActor(subject, target, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
 ///@desc Basis for a tweening actor
 function BaseTweenActor(_subject, _target) : GMTwerkActor() constructor {
 	///@func onAct(time)
@@ -46,9 +46,9 @@ function BaseTweenActor(_subject, _target) : GMTwerkActor() constructor {
 }
 
 ///@func TweenActor(subject, target, time, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int64} time The time to take
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} time The time to take
 ///@param {array} <opts> Additional options
 ///@desc Actor for normally tweening a value to a target
 function TweenActor(_subject, _target, _time) : BaseTweenActor(_subject, _target) constructor {
@@ -82,9 +82,9 @@ function TweenActor(_subject, _target, _time) : BaseTweenActor(_subject, _target
 }
 
 ///@func Tween(subject, target, time, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int64} time The time to take
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} time The time to take
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new normal tweening actor
 function Tween(_subject, _target, _time) {
@@ -94,8 +94,8 @@ function Tween(_subject, _target, _time) {
 }
 
 ///@func ZenosTweenActor(subject, target, fraction, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
 ///@param {real} fraction The fraction of the difference to cover per step
 ///@param {array} <opts> Additional options
 ///@desc Actor for fractionally tweening a value to a target
@@ -131,8 +131,8 @@ function ZenosTweenActor(_subject, _target, _fraction) : BaseTweenActor(_subject
 }
 
 ///@func ZenosTween(subject, target, fraction, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
 ///@param {real} fraction The fraction of the difference to cover per step
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for fractionally tweening a value to a target
@@ -143,9 +143,9 @@ function ZenosTween(_subject, _target, _fraction) {
 }
 
 ///@func StepTweenActor(subject, target, step, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int} step The fixed step size per frame
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} step The fixed step size per frame
 ///@param {array} <opts> Additional options
 ///@desc Actor for tweening a value to a target in fixed increments
 function StepTweenActor(_subject, _target, _step) : BaseTweenActor(_subject, _target) constructor {
@@ -182,9 +182,9 @@ function StepTweenActor(_subject, _target, _step) : BaseTweenActor(_subject, _ta
 }
 
 ///@func StepTween(subject, target, step, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int} step The fixed step size per act
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} step The fixed step size per act
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return an actor for tweening a value to a target in fixed increments
 function StepTween(_subject, _target, _step) {
@@ -194,10 +194,10 @@ function StepTween(_subject, _target, _step) {
 }
 
 ///@func ChannelTweenActor(subject, target, time, channel, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int64} time The time to take
-///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} time The time to take
+///@param {Struct.AnimCurveChannel,Array,Asset.GMAnimCurve} channel The animation curve channel to use for tweening values
 ///@param {array} <opts> Additional options
 ///@desc Actor for tweening a value to a target using the given animation curve channel
 function ChannelTweenActor(_subject, _target, _time, _channel) : BaseTweenActor(_subject, _target) constructor {
@@ -234,10 +234,10 @@ function ChannelTweenActor(_subject, _target, _time, _channel) : BaseTweenActor(
 }
 
 ///@func ChannelTween(subject, target, time, channel, <opts>)
-///@param {GMTwerkSelector} subject The subject selector
-///@param {real|int|colour} target The target value
-///@param {real|int64} time The time to take
-///@param {channel|array|animcurve} channel The animation curve channel to use for tweening values
+///@param {Struct.GMTwerkSelector} subject The subject selector
+///@param {Real,Constant.Color} target The target value
+///@param {Real} time The time to take
+///@param {Struct.AnimCurveChannel,Array,Asset.GMAnimCurve} channel The animation curve channel to use for tweening values
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a new curve channel tweening actor
 function ChannelTween(_subject, _target, _time, _channel) {

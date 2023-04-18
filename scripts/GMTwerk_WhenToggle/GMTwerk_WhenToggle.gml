@@ -1,7 +1,7 @@
 ///@func WhenToggleActor(condition, onFalseTrue, onTrueFalse, <opts>)
-///@param {method} condition Method that returns a boolean value indicating state
-///@param {method|undefined} onFalseTrue Method to perform when the condition goes from false to true
-///@param {method|undefined} onTrueFalse Method to perform when the condition goes from true to false
+///@param {Function} condition Method that returns a boolean value indicating state
+///@param {Function,Undefined} onFalseTrue Method to perform when the condition goes from false to true
+///@param {Function,Undefined} onTrueFalse Method to perform when the condition goes from true to false
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for responding when a condition flips between true and false
 function WhenToggleActor(_condition, _onFalseTrue, _onTrueFalse) : GMTwerkActor() constructor {
@@ -31,9 +31,9 @@ function WhenToggleActor(_condition, _onFalseTrue, _onTrueFalse) : GMTwerkActor(
 }
 
 ///@func WhenToggle(condition, onFalseTrue, onTrueFalse, <opts>)
-///@param {method} condition Method that returns a boolean value indicating state
-///@param {method|undefined} onFalseTrue Method to perform when the condition goes from false to true
-///@param {method|undefined} onTrueFalse Method to perform when the condition goes from true to false
+///@param {Function} condition Method that returns a boolean value indicating state
+///@param {Function,Undefined} onFalseTrue Method to perform when the condition goes from false to true
+///@param {Function,Undefined} onTrueFalse Method to perform when the condition goes from true to false
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for responding when a condition flips between true and false
 function WhenToggle(_condition, _onFalseTrue, _onTrueFalse) {

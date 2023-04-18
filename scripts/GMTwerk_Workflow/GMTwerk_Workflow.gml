@@ -1,5 +1,5 @@
 ///@func WorkflowActor(actions)
-///@param {method[]} actions Array of methods to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
+///@param {array<function>} actions Array of methods to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk actor for one-by-one action sequences
 function WorkflowActor(_actions) : GMTwerkActor() constructor {
@@ -50,7 +50,7 @@ function WorkflowActor(_actions) : GMTwerkActor() constructor {
 }
 
 ///@func Workflow(actions)
-///@param {method[]} actions Array of actions to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
+///@param {Array<Function>} actions Array of actions to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for one-by-one action sequences
 function Workflow(_actions) {

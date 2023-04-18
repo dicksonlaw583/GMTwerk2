@@ -1,6 +1,6 @@
 ///@func ItineraryActor(time, itinerary, <opts>)
-///@param {real|int64} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
-///@param {array|Iterable} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
+///@param {Real} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
+///@param {array,Struct} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for timeline-like action scheduling
 function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
@@ -76,7 +76,7 @@ function ItineraryActor(_time, _itinerary) : GMTwerkActor() constructor {
 }
 
 ///@func GMTwerkItineraryIterator(itineraryArray)
-///@param {[real|int64,method][]} itineraryArray An array of time-method pair arrays
+///@param {Array} itineraryArray An array of time-method pair arrays
 ///@desc Iterator for itinerary arrays
 function GMTwerkItineraryIterator(_itineraryArray) constructor {
 	///@func hasNext()
@@ -110,8 +110,8 @@ function GMTwerkItineraryIterator(_itineraryArray) constructor {
 }
 
 ///@func Itinerary(time, itinerary, <opts>)
-///@param {real|int64} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
-///@param {array|Iterable} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
+///@param {Real} time Starting time in milliseconds (real) or steps (int64); 0 counts up, >0 counts down
+///@param {array,struct} itinerary An array of time-method pair arrays, or a struct implementing hasNext() and next() placing times in .index and methods in .value
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for timeline-like action scheduling
 function Itinerary(_time, _itinerary) {

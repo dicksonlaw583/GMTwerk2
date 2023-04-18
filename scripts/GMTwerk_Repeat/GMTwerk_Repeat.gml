@@ -1,7 +1,7 @@
 ///@func RepeatActor(interval, repeats, onIterate, <opts>)
-///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
-///@param {int} repeats Number of times to repeat onIterate
-///@param {method} onIterate Method to perform upon each repetition
+///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
+///@param {Real} repeats Number of times to repeat onIterate
+///@param {Function} onIterate Method to perform upon each repetition
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk Actor for periodic time repetitions
 function RepeatActor(_interval, _repeats, _onIterate) : GMTwerkActor() constructor {
@@ -33,9 +33,9 @@ function RepeatActor(_interval, _repeats, _onIterate) : GMTwerkActor() construct
 }
 
 ///@func Repeat(interval, repeats, onIterate, <opts>)
-///@param {real|int64} interval Time between repetitions in milliseconds (real) or steps (int64)
-///@param {int} repeats Number of times to repeat onIterate
-///@param {method} onIterate Method to perform upon each repetition
+///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
+///@param {Real} repeats Number of times to repeat onIterate
+///@param {Function} onIterate Method to perform upon each repetition
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for periodic time repetitions
 function Repeat(_interval, _repeats, _onIterate) {

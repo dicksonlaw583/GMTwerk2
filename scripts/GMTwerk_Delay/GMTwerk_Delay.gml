@@ -1,6 +1,6 @@
 ///@func DelayActor(time, onDone, <opts>)
-///@param {real|int64} time Time in milliseconds (real) or steps (int64)
-///@param {method} onDone Method to perform when time elapses
+///@param {Real} time Time in milliseconds (real) or steps (int64)
+///@param {Function} onDone Method to perform when time elapses
 ///@param {array} <opts> Additional options
 ///@desc GMTwerk actor for simple time delay
 function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
@@ -24,8 +24,8 @@ function DelayActor(_time, _onDone) : GMTwerkActor() constructor {
 }
 
 ///@func Delay(time, onDone, <opts>)
-///@param {real|int64} time Time in milliseconds (real) or steps (int64)
-///@param {method} onDone Method to perform when time elapses
+///@param {Real} time Time in milliseconds (real) or steps (int64)
+///@param {Function} onDone Method to perform when time elapses
 ///@param {array} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for simple time delay
 function Delay(_time, _onDone) {
