@@ -77,13 +77,13 @@
   ],
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries_config","folderPath":"folders/Libraries_config.yy","order":0,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMAssert","folderPath":"folders/Libraries_config/GMAssert.yy","order":1,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMTwerk2","folderPath":"folders/Libraries_config/GMTwerk2.yy","order":0,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries_test","folderPath":"folders/Libraries_test.yy","order":0,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMTwerk2_test","folderPath":"folders/Libraries_test/GMTwerk2_test.yy","order":0,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries","folderPath":"folders/Libraries.yy","order":0,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMTwerk2","folderPath":"folders/Libraries/GMTwerk2.yy","order":0,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMAssert","folderPath":"folders/Libraries/GMAssert.yy","order":1,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMAssert","folderPath":"folders/Libraries_config/GMAssert.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMTwerk2","folderPath":"folders/Libraries/GMTwerk2.yy","order":0,},
   ],
   "AudioGroups": [
     {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
