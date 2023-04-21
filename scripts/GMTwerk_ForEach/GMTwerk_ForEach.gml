@@ -1,4 +1,4 @@
-///@func ForEachActor(interval, iterable, onIterate, <opts>)
+///@class ForEachActor(interval, iterable, onIterate, <opts>)
 ///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
 ///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
 ///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
@@ -6,6 +6,7 @@
 ///@desc GMTwerk Actor for periodic time repetitions over an array or an Iterable
 function ForEachActor(interval, iterable, onIterate, opts=undefined) : GMTwerkActor() constructor {
 	///@func onAct(timePassed)
+	///@self ForEachActor
 	///@param {real} timePassed Steps (non-delta time) or milliseconds (delta time) passed
 	///@desc Per-step action for this actor
 	static onAct = function(timePassed) {
@@ -39,6 +40,7 @@ function ForEachActor(interval, iterable, onIterate, opts=undefined) : GMTwerkAc
 ///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
 ///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
 ///@param {array,undefined} <opts> Additional options
+///@return {Struct.ForEachActor}
 ///@desc Enqueue and return a GMTwerk actor for periodic time repetitions over an array or an Iterable
 function ForEach(interval, iterable, onIterate, opts=undefined) {
 	var actor = new ForEachActor(interval, iterable, onIterate, opts);
