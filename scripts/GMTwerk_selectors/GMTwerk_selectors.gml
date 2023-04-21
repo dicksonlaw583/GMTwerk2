@@ -6,22 +6,29 @@ function GMTwerkSelector() constructor {
 ///@class GlobalVarSelector(name)
 ///@param {string} name The variable's name
 ///@desc Selector for a global variable
-function GlobalVarSelector(_name) : GMTwerkSelector() constructor {
-	name = _name;
+function GlobalVarSelector(name) : GMTwerkSelector() constructor {
+	self.name = name;
 	
 	///@func exists()
+	///@self GlobalVarSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		return variable_global_exists(name);
 	};
 	
 	///@func get()
+	///@self GlobalVarSelector
+	///@return {Any}
 	///@desc Return the target's value
 	static get = function() {
 		return variable_global_get(name);
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self GlobalVarSelector
+	///@param {Any} val The value to set to
+	///@return {Struct.GlobalVarSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_global_set(name, val);
@@ -42,11 +49,13 @@ function GlobalVar(name) {
 ///@class GlobalVecSelector(names)
 ///@param {Array<String>} names Array of variable names
 ///@desc Selector for multiple global variables
-function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
-	names = _names;
+function GlobalVecSelector(names) : GMTwerkSelector() constructor {
+	self.names = names;
 	dim = array_length(names);
 	
 	///@func exists()
+	///@self GlobalVecSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		for (var i = dim-1; i >= 0; --i) {
@@ -56,6 +65,8 @@ function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
 	};
 	
 	///@func get()
+	///@self GlobalVecSelector
+	///@return {Array<Any>}
 	///@desc Return the target's value
 	static get = function() {
 		var v = array_create(dim);
@@ -65,7 +76,10 @@ function GlobalVecSelector(_names) : GMTwerkSelector() constructor {
 		return v;
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self GlobalVecSelector
+	///@param {Array} val The values to set to
+	///@return {Struct.GlobalVecSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		for (var i = dim-1; i >= 0; --i) {
@@ -89,23 +103,30 @@ function GlobalVec(names) {
 ///@param {string} name The variable's name
 ///@param {Id.Instance} inst The instance ID of the variable's owner
 ///@desc Selector for an instance variable
-function InstanceVarSelector(_name, _inst) : GMTwerkSelector() constructor {
-	name = _name;
-	inst = _inst;
+function InstanceVarSelector(name, inst) : GMTwerkSelector() constructor {
+	self.name = name;
+	self.inst = inst;
 	
 	///@func exists()
+	///@self InstanceVarSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		return instance_exists(inst) && variable_instance_exists(inst, name);
 	};
 	
 	///@func get()
+	///@self InstanceVarSelector
+	///@return {Any}
 	///@desc Return the target's value
 	static get = function() {
 		return variable_instance_get(inst, name);
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self InstanceVarSelector
+	///@param {Any} val The value to set to
+	///@return {Struct.InstanceVarSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_instance_set(inst, name, val);
@@ -113,27 +134,29 @@ function InstanceVarSelector(_name, _inst) : GMTwerkSelector() constructor {
 	};
 }
 
-///@func InstanceVar(name, <inst>)
+///@func InstanceVar(name, [inst])
 ///@param {string} name The variable's name
-///@param {Id.Instance} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@param {Id.Instance} [inst] (Optional) The instance ID of the variable's owner (default: current instance ID)
 ///@return {Struct.InstanceVarSelector}
 ///@pure
 ///@desc Return an InstanceVarSelector targeting the named instance variable
-function InstanceVar() {
+function InstanceVar(name, inst=id) {
 	gml_pragma("forceinline");
-	return new InstanceVarSelector(argument[0], (argument_count > 1) ? argument[1] : id);
+	return new InstanceVarSelector(name, inst);
 }
 
-///@class InstanceVecSelector(names)
+///@class InstanceVecSelector(names, inst)
 ///@param {Array<String>} names Array of variable names
 ///@param {Id.Instance} inst The instance ID of the variable's owner
 ///@desc Selector for multiple instance variables
-function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
-	names = _names;
+function InstanceVecSelector(names, inst) : GMTwerkSelector() constructor {
+	self.names = names;
 	dim = array_length(names);
-	inst = _inst;
+	self.inst = inst;
 	
 	///@func exists()
+	///@self InstanceVecSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		for (var i = dim-1; i >= 0; --i) {
@@ -143,6 +166,8 @@ function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
 	};
 	
 	///@func get()
+	///@self InstanceVecSelector
+	///@return {Array<Any>}
 	///@desc Return the target's value
 	static get = function() {
 		var v = array_create(dim);
@@ -152,7 +177,10 @@ function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
 		return v;
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self InstanceVecSelector
+	///@param {Array} val The values to set to
+	///@return {Struct.InstanceVecSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		for (var i = dim-1; i >= 0; --i) {
@@ -162,38 +190,45 @@ function InstanceVecSelector(_names, _inst) : GMTwerkSelector() constructor {
 	};
 }
 
-///@func InstanceVec(names)
+///@func InstanceVec(names, [inst])
 ///@param {Array<String>} names The variables' names
-///@param {Id.Instance} <inst> (Optional) The instance ID of the variable's owner (default: current instance ID)
+///@param {Id.Instance} [inst] (Optional) The instance ID of the variable's owner (default: current instance ID)
 ///@return {Struct.InstanceVecSelector}
 ///@pure
 ///@desc Return a InstanceVecSelector targeting the named instance variables
-function InstanceVec() {
+function InstanceVec(names, inst=id) {
 	gml_pragma("forceinline");
-	return new InstanceVecSelector(argument[0], (argument_count > 1) ? argument[1] : id);
+	return new InstanceVecSelector(names, inst);
 }
 
 ///@class StructVarSelector(name, strc)
 ///@param {string} name The targeted struct key
 ///@param {struct} strc The target struct
 ///@desc Selector for a value in a struct
-function StructVarSelector(_name, _strc) constructor {
-	name = _name;
-	strc = _strc;
+function StructVarSelector(name, strc) constructor {
+	self.name = name;
+	self.strc = strc;
 	
 	///@func exists()
+	///@self StructVarSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		return is_struct(strc) && variable_struct_exists(strc, name);
 	};
 	
 	///@func get()
+	///@self StructVarSelector
+	///@return {Any}
 	///@desc Return the target's value
 	static get = function() {
 		return variable_struct_get(strc, name);
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self StructVarSelector
+	///@param {Any} val The value to set to
+	///@return {Struct.StructVarSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_struct_set(strc, name, val);
@@ -216,12 +251,14 @@ function StructVar(name, strc) {
 ///@param {Array<String>} names The targeted struct keys
 ///@param {struct} strc The target struct
 ///@desc Selector for several values in a struct
-function StructVecSelector(_names, _strc) constructor {
-	names = _names;
+function StructVecSelector(names, strc) constructor {
+	self.names = names;
 	dim = array_length(names);
-	strc = _strc;
+	self.strc = strc;
 	
 	///@func exists()
+	///@self StructVecSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		if (!is_struct(strc)) return false;
@@ -232,6 +269,8 @@ function StructVecSelector(_names, _strc) constructor {
 	};
 	
 	///@func get()
+	///@self StructVecSelector
+	///@return {Array<Any>}
 	///@desc Return the target's value
 	static get = function() {
 		var v = array_create(dim);
@@ -241,7 +280,10 @@ function StructVecSelector(_names, _strc) constructor {
 		return v;
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self StructVecSelector
+	///@param {Array} val The values to set to
+	///@return {Struct.StructVecSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		for (var i = dim-1; i >= 0; --i) {
@@ -266,23 +308,30 @@ function StructVec(names, strc) {
 ///@param {Real} index The targeted position in the array
 ///@param {array} array The targeted array
 ///@desc Selector for a value in an array
-function ArrayVarSelector(_index, _array) constructor {
-	index = _index;
-	array = _array;
+function ArrayVarSelector(index, array) constructor {
+	self.index = index;
+	self.array = array;
 	
 	///@func exists()
+	///@self ArrayVarSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		return is_array(array) && array_length(array) > index;
 	};
 	
 	///@func get()
+	///@self ArrayVarSelector
+	///@return {Any}
 	///@desc Return the target's value
 	static get = function() {
 		return array[index];
 	};
 	
 	///@func set()
+	///@self ArrayVarSelector
+	///@param {Any} val The value to set to
+	///@return {Struct.ArrayVarSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		array[@index] = val;
@@ -302,24 +351,31 @@ function ArrayVar(index, array) {
 }
 
 ///@class DataUnitSelector(data)
-///@param data The starting data value
+///@param {Any} data The starting data value
 ///@desc Selector for a placeholder value
-function DataUnitSelector(_data) : GMTwerkSelector() constructor {
-	data = _data;
+function DataUnitSelector(data) : GMTwerkSelector() constructor {
+	self.data = data;
 	
 	///@func exists()
+	///@self DataUnitSelector
+	///@return {Bool}
 	///@desc Return whether the target exists
 	static exists = function() {
 		return true;
 	};
 	
 	///@func get()
+	///@self DataUnitSelector
+	///@return {Any}
 	///@desc Return the target's value
 	static get = function() {
 		return data;
 	};
 	
-	///@func set()
+	///@func set(val)
+	///@self DataUnitSelector
+	///@param {Any} val The value to set to
+	///@return {Struct.DataUnitSelector}
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		data = val;
