@@ -30,7 +30,7 @@ elapsed = {
 
 // Delay (1)
 elapsed._Delay = 1;
-Delay(1000, function() {
+var dd = Delay(1000, function() {
 	--elapsed._Delay;
 });
 

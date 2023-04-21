@@ -1,9 +1,9 @@
 ///@class DelayActor(time, onDone, [opts])
 ///@param {Real} time Time in milliseconds (real) or steps (int64)
 ///@param {Function,undefined} onDone Method to perform when time elapses
-///@param {array} [opts] Additional options
+///@param {array, undefined} [opts] Additional options
 ///@desc GMTwerk actor for simple time delay
-function DelayActor(time, onDone=undefined) : GMTwerkActor() constructor {
+function DelayActor(time, onDone=undefined, opts=undefined) : GMTwerkActor() constructor {
 	///@func onAct(timePassed)
 	///@self DelayActor
 	///@param {real} timePassed Steps (non-delta time) or milliseconds (delta time) passed
@@ -20,7 +20,7 @@ function DelayActor(time, onDone=undefined) : GMTwerkActor() constructor {
 	if (!is_undefined(onDone)) {
 		self.onDone = onDone;
 	}
-	if (argument_count > 2) includeOpts(argument[2]);
+	if (!is_undefined(opts)) includeOpts(opts);
 	
 	// Convert times
 	time = convertTime(time);
