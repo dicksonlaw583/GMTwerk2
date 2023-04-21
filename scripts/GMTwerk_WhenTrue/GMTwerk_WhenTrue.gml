@@ -1,4 +1,4 @@
-///@func WhenTrueActor(condition, onDone, [opts])
+///@class WhenTrueActor(condition, onDone, [opts])
 ///@param {Function} condition Method that returns true for finishing, false for waiting more
 ///@param {Function,undefined} onDone Method to perform when the condition becomes true
 ///@param {array} [opts] Additional options
@@ -24,6 +24,7 @@ function WhenTrueActor(condition, onDone=undefined, opts=undefined) : GMTwerkAct
 ///@param {Function} condition Method that returns true for finishing, false for waiting more
 ///@param {Function,undefined} onDone Method to perform when the condition becomes true
 ///@param {array,undefined} [opts] Additional options
+///@return {Struct.WhenTrueActor}
 ///@desc Enqueue and return a GMTwerk actor for responding when a condition becomes true
 function WhenTrue(condition, onDone=undefined, opts=undefined) {
 	var actor = new WhenTrueActor(condition, onDone, opts);
