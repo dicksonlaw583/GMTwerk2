@@ -1,5 +1,6 @@
 ///@func gmtk2_test_selectors()
-function gmtk2_test_selectors() {
+function gmtk2_test_selectors() // Feather disable GM1041
+{
 	var selector, temp;
 	global.__gmtk2_test_selectors_globalvar__ = undefined;
 	global.__gmtk2_test_selectors_globalvar2__ = undefined;
@@ -66,7 +67,9 @@ function gmtk2_test_selectors() {
 	assert_equal(temp.foo, 6, "StructVar exists result after set");
 	selector = StructVar("baz", temp);
 	assert_fail(selector.exists(), "StructVar variable DNE exists");
+	// Feather disable GM1041
 	selector = StructVar("bar", pointer_null);
+	// Feather enable GM1041
 	assert_fail(selector.exists(), "StructVar pointer_null exists");
 	#endregion
 	
@@ -79,7 +82,9 @@ function gmtk2_test_selectors() {
 	assert_equal(temp, { foo: 6, bar: 8 }, "StructVec exists result after set");
 	selector = StructVec(["baz", "bar"], temp);
 	assert_fail(selector.exists(), "StructVec variable DNE exists");
+	// Feather disable GM1041
 	selector = StructVec(["foo", "bar"], pointer_null);
+	// Feather enable GM1041
 	assert_fail(selector.exists(), "StructVec pointer_null exists");
 	#endregion
 	
@@ -92,8 +97,10 @@ function gmtk2_test_selectors() {
 	assert_equal(temp[1], 6, "ArrayVar exists result after set");
 	selector = ArrayVar(2, temp);
 	assert_fail(selector.exists(), "ArrayVar variable DNE exists");
+	// Feather disable GM1041
 	selector = ArrayVar(0, pointer_null);
-	assert_fail(selector.exists(), "ArrayVar pointer_null exists");	
+	// Feather enable GM1041
+	assert_fail(selector.exists(), "ArrayVar pointer_null exists");
 	#endregion
 	
 	#region DataUnit

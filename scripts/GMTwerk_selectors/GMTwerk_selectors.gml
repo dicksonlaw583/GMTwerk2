@@ -294,7 +294,7 @@ function StructVecSelector(names, strc) constructor {
 }
 
 ///@func StructVec(names, strc)
-///@param {Array<String>} name The targeted struct keys
+///@param {Array<String>} names The targeted struct keys
 ///@param {struct} strc The target struct
 ///@return {Struct.StructVecSelector}
 ///@pure
