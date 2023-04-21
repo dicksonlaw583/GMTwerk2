@@ -97,10 +97,10 @@ function GMTwerkActor() constructor {
 	///@self GMTwerkActor
 	///@param {array} opts Alternating array of parameter names and values
 	///@desc Include the given options into the actor
-	static includeOpts = function(params) {
-		if (is_array(params)) { // BUGFIX: 2.3.2.420 - Catch argument_count failure
-			for (var i = array_length(params)-2; i >= 0; i -= 2) {
-				variable_struct_set(self, params[i], params[i+1]);
+	static includeOpts = function(opts) {
+		if (is_array(opts)) { // BUGFIX: 2.3.2.420 - Catch argument_count failure
+			for (var i = array_length(opts)-2; i >= 0; i -= 2) {
+				variable_struct_set(self, opts[i], opts[i+1]);
 			}
 			if (!is_undefined(bank)) {
 				bank.add(self);
@@ -137,7 +137,8 @@ function GMTwerkBank() constructor {
 
 	///@func act(<steps>, <microseconds>)
 	///@self GMTwerkBank
-	///@param {real} time The amount of time to elapse for this tick
+	///@param {real} steps The amount of frames to elapse for this tick
+	///@param {real} microseconds The amount of microseconds to elapse for this tick
 	///@desc Process all actors in the linked list given the elapsed time since last tick
 	static act = function(steps, microseconds) {
 		var needCleanup = false;
