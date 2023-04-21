@@ -2,14 +2,14 @@
 ///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
 ///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
 ///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
-///@param {array} <opts> Additional options
+///@param {array,undefined} <opts> Additional options
 ///@desc GMTwerk Actor for periodic time repetitions over an array or an Iterable
-function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constructor {
-	///@func onAct(time)
-	///@param {real} time Steps (non-delta time) or milliseconds (delta time) passed
+function ForEachActor(interval, iterable, onIterate, opts=undefined) : GMTwerkActor() constructor {
+	///@func onAct(timePassed)
+	///@param {real} timePassed Steps (non-delta time) or milliseconds (delta time) passed
 	///@desc Per-step action for this actor
-	static onAct = function(_timePassed) {
-		time -= _timePassed;
+	static onAct = function(timePassed) {
+		time -= timePassed;
 		while (time <= 0) {
 			onIterate(iterable.value, iterable.index);
 			iterable.next();
@@ -23,25 +23,25 @@ function ForEachActor(_interval, _iterable, _onIterate) : GMTwerkActor() constru
 	};
 	
 	// Constructor
-	time = _interval;
-	interval = time;
-	iterable = is_array(_iterable) ? new GMTwerkArrayIterator(_iterable) : _iterable;
-	onIterate = _onIterate;
-	if (argument_count > 3) includeOpts(argument[3]);
+	time = interval;
+	self.interval = time;
+	self.iterable = is_array(iterable) ? new GMTwerkArrayIterator(iterable) : iterable;
+	self.onIterate = onIterate;
+	if (!is_undefined(opts)) includeOpts(opts);
 	
 	// Convert times
 	time = convertTime(time);
-	interval = convertTime(interval);
+	self.interval = convertTime(self.interval);
 }
 
 ///@func ForEach(interval, iterable, onIterate, <opts>)
 ///@param {Real} interval Time between repetitions in milliseconds (real) or steps (int64)
 ///@param {array,struct} iterable An array or a struct implementing hasNext() and next()
 ///@param {Function} onIterate Method to perform upon each repetition (will be given value and index)
-///@param {array} <opts> Additional options
+///@param {array,undefined} <opts> Additional options
 ///@desc Enqueue and return a GMTwerk actor for periodic time repetitions over an array or an Iterable
-function ForEach(_interval, _iterable, _onIterate) {
-	var actor = new ForEachActor(_interval, _iterable, _onIterate, (argument_count > 3) ? argument[3] : undefined);
+function ForEach(interval, iterable, onIterate, opts=undefined) {
+	var actor = new ForEachActor(interval, iterable, onIterate, opts);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
