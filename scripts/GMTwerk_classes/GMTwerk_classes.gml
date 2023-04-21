@@ -10,10 +10,11 @@ enum GMTWERK_STATE {
 ///@class GMTwerkActor()
 ///@desc Base class for all GMTwerk actors
 function GMTwerkActor() constructor {
-	///@func noop()
+	///@func noop([arg])
+	///@param [arg]
 	///@self GMTwerkActor
 	///@desc Do nothing (placeholder for callbacks)
-	static noop = function() {};
+	static noop = function(arg=undefined) {};
 
 	///@func pause(p)
 	///@self GMTwerkActor
