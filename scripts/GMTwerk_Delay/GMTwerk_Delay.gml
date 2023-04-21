@@ -23,7 +23,7 @@ function DelayActor(time, onDone=undefined, opts=undefined) : GMTwerkActor() con
 	if (!is_undefined(opts)) includeOpts(opts);
 	
 	// Convert times
-	time = convertTime(time);
+	self.time = convertTime(self.time);
 }
 
 ///@func Delay(time, onDone, [opts])
