@@ -1,12 +1,13 @@
-///@func WorkflowActor(actions)
+///@class WorkflowActor(actions, [opts])
 ///@param {array<function>} actions Array of methods to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
-///@param {array} <opts> Additional options
+///@param {array,undefined} [opts] Additional options
 ///@desc GMTwerk actor for one-by-one action sequences
-function WorkflowActor(_actions) : GMTwerkActor() constructor {
-	///@func onAct(time)
-	///@param {real} time Steps (non-delta time) or milliseconds (delta time) passed
+function WorkflowActor(actions, opts=undefined) : GMTwerkActor() constructor {
+	///@func onAct(timePassed)
+	///@self WorkflowActor
+	///@param {real} timePassed Steps (non-delta time) or milliseconds (delta time) passed
 	///@desc Per-step action for this actor
-	static onAct = function(_timePassed) {
+	static onAct = function(timePassed) {
 		if (!acted) {
 			var currentAction = actions[actionNumber];
 			currentActor = currentAction();
@@ -42,19 +43,20 @@ function WorkflowActor(_actions) : GMTwerkActor() constructor {
 	};
 	
 	// Constructor
-	actions = _actions;
+	self.actions = actions;
 	actionNumber = 0;
 	acted = false;
 	currentActor = undefined;
-	if (argument_count > 1) includeOpts(argument[1]);
+	if (!is_undefined(opts)) includeOpts(opts);
 }
 
-///@func Workflow(actions)
+///@func Workflow(actions, [opts])
 ///@param {Array<Function>} actions Array of actions to run in sequence. A method can return a GMTwerk actor to wait until it finishes.
-///@param {array} <opts> Additional options
+///@param {array,undefined} [opts] Additional options
+///@return {Struct.WorkflowActor}
 ///@desc Enqueue and return a GMTwerk actor for one-by-one action sequences
-function Workflow(_actions) {
-	var actor = new WorkflowActor(_actions, (argument_count > 1) ? argument[1] : undefined);
+function Workflow(actions, opts=undefined) {
+	var actor = new WorkflowActor(actions, opts);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
