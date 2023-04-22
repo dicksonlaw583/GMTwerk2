@@ -95,6 +95,12 @@ LogValue(DataUnit(0), 3, 200, ["onLog", function() {
 	--elapsed._LogValue;
 }]);
 
+// QueueValue (10)
+elapsed._QueueValue = 10;
+QueueValue(300, function(val) {
+	elapsed._QueueValue -= val;
+}).push(1).push(2).push(3).push(4);
+
 // Tween (4)
 elapsed._Tween = 4;
 progressTween = function() {

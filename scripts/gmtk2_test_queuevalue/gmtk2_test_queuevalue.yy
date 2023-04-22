@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "gmtk2_test_all",
+  "name": "gmtk2_test_queuevalue",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
