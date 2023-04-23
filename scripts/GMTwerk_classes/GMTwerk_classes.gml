@@ -136,12 +136,12 @@ function GMTwerkBank() constructor {
 		++size;
 	};
 
-	///@func act(<steps>, <microseconds>)
+	///@func act([steps], [microseconds])
 	///@self GMTwerkBank
-	///@param {real} steps The amount of frames to elapse for this tick
-	///@param {real} microseconds The amount of microseconds to elapse for this tick
+	///@param {Real} steps Number of steps elapsed for this tick (default: GMTWERK_DEFAULT_STEP_SPEED)
+	///@param {Real} microseconds Number of milliseconds elapsed for this tick (default: delta_time)
 	///@desc Process all actors in the linked list given the elapsed time since last tick
-	static act = function(steps, microseconds) {
+	static act = function(steps=GMTWERK_DEFAULT_STEP_SPEED, microseconds=delta_time) {
 		var needCleanup = false;
 		// For every node in the linked list
 		var previousNode = undefined;
@@ -149,7 +149,7 @@ function GMTwerkBank() constructor {
 		while (!is_undefined(currentNode)) {
 			// Act
 			var currentActor = currentNode[0];
-			needCleanup = currentActor.act(currentActor.deltaTime ? (is_undefined(microseconds) ? delta_time : microseconds) : (is_undefined(steps) ? GMTWERK_DEFAULT_STEP_SPEED : steps)) <= GMTWERK_STATE.DONE || needCleanup;
+			needCleanup = currentActor.act(currentActor.deltaTime ? microseconds : steps) <= GMTWERK_STATE.DONE || needCleanup;
 			// Go to next
 			currentNode = currentNode[1];
 		}
@@ -243,10 +243,10 @@ function gmtwerk_host() {
 	__gmtwerk_self_host__ = new GMTwerkBank();
 }
 
-///@func gmtwerk_run(steps, microseconds)
-///@param {Real} steps
-///@param {Real} microseconds
+///@func gmtwerk_run([steps], [microseconds])
+///@param {Real} steps Number of steps elapsed for this tick (default: GMTWERK_DEFAULT_STEP_SPEED)
+///@param {Real} microseconds Number of milliseconds elapsed for this tick (default: delta_time)
 ///@desc Run the self-hosting twerk bank
-function gmtwerk_run(steps, microseconds) {
+function gmtwerk_run(steps=GMTWERK_DEFAULT_STEP_SPEED, microseconds=delta_time) {
 	__gmtwerk_self_host__.act(steps, microseconds);
 }
