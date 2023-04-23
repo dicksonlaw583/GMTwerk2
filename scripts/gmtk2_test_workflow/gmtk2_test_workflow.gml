@@ -43,7 +43,9 @@ function gmtk2_test_workflow() {
 	assert_isnt_struct(workflow.currentActor, "WorkflowActor ic");
 	assert_equal(workflow.act(1), GMTWERK_STATE.ACTIVE, "WorkflowActor id");
 	assert_equal([subject.triggered, delaySubjects[0].triggered, delaySubjects[1].triggered], [false, true, false], "WorkflowActor ie");
+	///Feather disable GM1041
 	assert_is_struct(workflow.currentActor, "WorkflowActor if");
+	///Feather enable GM1041
 	// Second delay
 	workflow.currentActor.act(1);
 	assert_equal(workflow.act(1), GMTWERK_STATE.ACTIVE, "WorkflowActor 3a");

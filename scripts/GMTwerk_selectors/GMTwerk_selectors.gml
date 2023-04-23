@@ -32,7 +32,9 @@ function GlobalVarSelector(name) : GMTwerkSelector() constructor {
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_global_set(name, val);
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -85,7 +87,9 @@ function GlobalVecSelector(names) : GMTwerkSelector() constructor {
 		for (var i = dim-1; i >= 0; --i) {
 			variable_global_set(names[i], val[i]);
 		}
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -130,7 +134,9 @@ function InstanceVarSelector(name, inst) : GMTwerkSelector() constructor {
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_instance_set(inst, name, val);
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -186,7 +192,9 @@ function InstanceVecSelector(names, inst) : GMTwerkSelector() constructor {
 		for (var i = dim-1; i >= 0; --i) {
 			variable_instance_set(inst, names[i], val[i]);
 		}
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -232,7 +240,9 @@ function StructVarSelector(name, strc) constructor {
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		variable_struct_set(strc, name, val);
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -289,7 +299,9 @@ function StructVecSelector(names, strc) constructor {
 		for (var i = dim-1; i >= 0; --i) {
 			variable_struct_set(strc, names[i], val[i]);
 		}
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -335,7 +347,9 @@ function ArrayVarSelector(index, array) constructor {
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		array[@index] = val;
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 
@@ -379,7 +393,9 @@ function DataUnitSelector(data) : GMTwerkSelector() constructor {
 	///@desc Set the target's value and return self
 	static set = function(val) {
 		data = val;
+		///Feather disable GM1045
 		return self;
+		///Feather enable GM1045
 	};
 }
 

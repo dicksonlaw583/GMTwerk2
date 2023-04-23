@@ -40,7 +40,9 @@ function ItineraryActor(time, itinerary, opts=undefined) : GMTwerkActor() constr
 		itinerary.next();
 		// Has next content
 		if (itinerary.hasNext()) {
+			///Feather disable GM1041
 			nextMoment = convertTime(itinerary.index);
+			///Feather enable GM1041
 			nextAction = itinerary.value;
 			return true;
 		}
