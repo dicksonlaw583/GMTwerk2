@@ -94,8 +94,8 @@ function TweenActor(subject, target, time, opts=undefined) : BaseTweenActor(subj
 ///@param {Real} time The time to take
 ///@param {array,undefined} [opts] Additional options
 ///@desc Enqueue and return a new normal tweening actor
-function Tween(subject, target, time) {
-	var actor = new TweenActor(subject, target, time, (argument_count > 3) ? argument[3] : undefined);
+function Tween(subject, target, time, opts=undefined) {
+	var actor = new TweenActor(subject, target, time, opts);
 	__gmtwerk_insert__(actor);
 	return actor;
 }
