@@ -1,4 +1,5 @@
 ///@func gmtk2_test_twerk()
+///@desc Test GMTwerk 2's Twerk actor.
 function gmtk2_test_twerk() {
 	var twerker, listener;
 	

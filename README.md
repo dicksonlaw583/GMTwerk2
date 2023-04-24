@@ -6,11 +6,11 @@ GMTwerk 2 allows you to set delays, listen to conditions and animate values asyn
 
 ## Requirements
 
-- GameMaker Studio 2.3.1+
+- GameMaker Studio 2022+ / 2.3.7+
 
 ## Installation
 
-Get the current asset package and documentation from [the releases page](https://github.com/dicksonlaw583/GMTwerk2/releases). Simply extract everything to your project, including the host object and all accompanying class definitions.
+Get the current asset package and documentation from [the releases page](https://github.com/dicksonlaw583/GMTwerk2/releases). Extract everything to your project, including the host object and all accompanying class definitions.
 
 Once you install the package, you may optionally change the options in `__GMTWERK_CONFIG__`. The defaults should be appropriate for most step-based setups.
 
@@ -43,4 +43,3 @@ Tween(InstanceVar("image_alpha"), 0, 500, [
     }
 ]);
 ```
-

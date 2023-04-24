@@ -1,3 +1,10 @@
+///@func __te_bounce_kernel__(t, b, c)
+///@param {Real} t Interpolation coefficient (0-1)
+///@param {Real} b Base value
+///@param {Real} c Amplitude value
+///@return {Real}
+///@ignore
+///@desc (INTERNAL: GMTwerk 2) Bouncing curve main body. Appears once in IN and OUT, twice in IN-OUT.
 function __te_bounce_kernel__(t, b, c) {
 	if (t < (1/2.75)) {
 		return c*(7.5625*t*t) + b;
@@ -14,18 +21,20 @@ function __te_bounce_kernel__(t, b, c) {
 }
 
 ///@func te_back_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Back-in tweening equation.
 function te_back_in(x0, x1, t) {
 	var s = 1.70158;
 	return (x1-x0)*t*t*((s+1)*t - s) + x0;
 }
 
 ///@func te_back_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Back-in-out tweening equation.
 function te_back_inout(x0, x1, t) {
 	var s = 1.70158*1.525;
 	t /= 1/2;
@@ -39,9 +48,10 @@ function te_back_inout(x0, x1, t) {
 }
 
 ///@func te_back_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Back-out tweening equation.
 function te_back_out(x0, x1, t) {
 	var s = 1.70158;
 	t = t-1;
@@ -49,18 +59,20 @@ function te_back_out(x0, x1, t) {
 }
 
 ///@func te_bounce_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Bounce-in tweening equation.
 function te_bounce_in(x0, x1, t) {
 	var c = x1-x0;
 	return c - __te_bounce_kernel__(1-t, 0, c) + x0;
 }
 
 ///@func te_bounce_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Bounce-in-out tweening equation.
 function te_bounce_inout(x0, x1, t) {
 	var c = x1-x0;
 	if (t < 1/2) {
@@ -72,25 +84,28 @@ function te_bounce_inout(x0, x1, t) {
 }
 
 ///@func te_bounce_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Bounce-out tweening equation.
 function te_bounce_out(x0, x1, t) {
 	return __te_bounce_kernel__(t, x0, x1-x0);
 }
 
 ///@func te_circ_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Circle-in tweening equation.
 function te_circ_in(x0, x1, t) {
 	return (x0-x1) * (sqrt(1 - t*t) - 1) + x0;
 }
 
 ///@func te_circ_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Circle-in-out tweening equation.
 function te_circ_inout(x0, x1, t) {
 	t /= 1/2;
 	if (t < 1) {
@@ -103,26 +118,29 @@ function te_circ_inout(x0, x1, t) {
 }
 
 ///@func te_circ_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Circle-out tweening equation.
 function te_circ_out(x0, x1, t) {
 	t = t-1;
 	return (x1-x0) * sqrt(1 - t*t) + x0;
 }
 
 ///@func te_cubic_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Cubic-in tweening equation.
 function te_cubic_in(x0 ,x1, t) {
 	return (x1-x0)*t*t*t+x0;
 }
 
 ///@func te_cubic_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Cubic-in-out tweening equation.
 function te_cubic_inout(x0, x1, t) {
 	t /= 1/2;
 	if (t < 1) {
@@ -135,18 +153,20 @@ function te_cubic_inout(x0, x1, t) {
 }
 
 ///@func te_cubic_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Cubic-out tweening equation.
 function te_cubic_out(x0, x1, t) {
 	t = t - 1;
 	return (x1-x0)*(t*t*t+1)+x0;
 }
 
 ///@func te_elastic_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Elastic-in tweening equation.
 function te_elastic_in(x0, x1, t) {
 	var c = x1-x0;
 	var s = 1.70158;
@@ -172,9 +192,10 @@ function te_elastic_in(x0, x1, t) {
 }
 
 ///@func te_elastic_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Elastic-in-out tweening equation.
 function te_elastic_inout(x0, x1, t) {
 	var c = x1-x0;
 	var s = 1.70158;
@@ -207,9 +228,10 @@ function te_elastic_inout(x0, x1, t) {
 }
 
 ///@func te_elastic_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Elastic-out tweening equation.
 function te_elastic_out(x0, x1, t) {
 	var c = x1-x0;
 	var s = 1.70158;
@@ -235,9 +257,10 @@ function te_elastic_out(x0, x1, t) {
 }
 
 ///@func te_exp_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Exponential-in tweening equation.
 function te_exp_in(x0, x1, t) {
 	if (t == 0) {
 		return x0;
@@ -248,9 +271,10 @@ function te_exp_in(x0, x1, t) {
 }
 
 ///@func te_exp_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Exponential-in-out tweening equation.
 function te_exp_inout(x0, x1, t) {
 	if (t == 0) {
 		return x0;
@@ -269,9 +293,10 @@ function te_exp_inout(x0, x1, t) {
 }
 
 ///@func te_exp_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Exponential-out tweening equation.
 function te_exp_out(x0, x1, t) {
 	if (t == 1) {
 		return x1;
@@ -282,25 +307,28 @@ function te_exp_out(x0, x1, t) {
 }
 
 ///@func te_linear(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Linear tweening equation.
 function te_linear(x0, x1, t) {
 	return lerp(x0, x1, t);
 }
 
 ///@func te_quadratic_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quadratic-in tweening equation.
 function te_quadratic_in(x0 ,x1, t) {
 	return (x1-x0)*t*t+x0;
 }
 
 ///@func te_quadratic_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quadratic-in-out tweening equation.
 function te_quadratic_inout(x0, x1, t) {
 	t /= 1/2;
 	if (t < 1) {
@@ -313,25 +341,28 @@ function te_quadratic_inout(x0, x1, t) {
 }
 
 ///@func te_quadratic_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quadratic-out tweening equation.
 function te_quadratic_out(x0, x1, t) {
 	return (x0-x1)*t*(t-2)+x0;
 }
 
 ///@func te_quartic_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quartic-in tweening equation.
 function te_quartic_in(x0, x1, t) {
 	return (x1-x0)*t*t*t*t + x0;
 }
 
 ///@func te_quartic_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quartic-in-out tweening equation.
 function te_quartic_inout(x0, x1, t) {
 	t /= 1/2;
 	if (t < 1) {
@@ -344,26 +375,29 @@ function te_quartic_inout(x0, x1, t) {
 }
 
 ///@func te_quartic_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quartic-out tweening equation.
 function te_quartic_out(x0, x1, t) {
 	t = t - 1;
 	return (x0-x1)*(t*t*t*t-1) + x0;
 }
 
 ///@func te_quintic_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quintic-in tweening equation.
 function te_quintic_in(x0, x1, t) {
 	return (x1-x0)*t*t*t*t*t + x0;
 }
 
 ///@func te_quintic_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quintic-in-out tweening equation.
 function te_quintic_inout(x0, x1, t) {
 	t /= 1/2;
 	if (t < 1) {
@@ -376,43 +410,48 @@ function te_quintic_inout(x0, x1, t) {
 }
 
 ///@func te_quintic_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Quintic-out tweening equation.
 function te_quintic_out(x0, x1, t) {
 	t = t - 1;
 	return (x1-x0)*(t*t*t*t*t+1) + x0;
 }
 
 ///@func te_sine_in(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Sinusoid-in tweening equation.
 function te_sine_in(x0, x1, t) {
 	var c = x1-x0;
 	return -c * cos(t * pi/2) + c + x0;
 }
 
 ///@func te_sine_inout(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Sinusoid-in-out tweening equation.
 function te_sine_inout(x0, x1, t) {
 	return (x0-x1)/2 * (cos(t * pi) - 1) + x0;
 }
 
 ///@func te_sine_out(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Sinusoid-out tweening equation.
 function te_sine_out(x0, x1, t) {
 	return (x1-x0) * sin(t * pi/2) + x0;
 }
 
 ///@func te_swing(x0, x1, t)
-///@param x0
-///@param x1
-///@param t
+///@param {Real} x0 Starting value
+///@param {Real} x1 Ending value
+///@param {Real} t Interpolation coefficient (0-1)
+///@desc Swinging tweening equation.
 function te_swing(x0, x1, t) {
 	return lerp(x0, x1, 0.5-cos(t*pi)/2);
 }

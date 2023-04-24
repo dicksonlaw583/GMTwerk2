@@ -1,4 +1,5 @@
 ///@func gmtk2_test_all()
+///@desc Test all GMTwerk features.
 function gmtk2_test_all() {
 	global.__test_fails__ = 0;
 	var timeA = current_time;
@@ -20,6 +21,7 @@ function gmtk2_test_all() {
 	gmtk2_test_twerk_wave();
 	gmtk2_test_twerk();
 	gmtk2_test_workflow();
+	gmtk2_test_queuevalue();
 	gmtk2_test_bugs();
 	/** ^^ Place tests here ^^ **/
 	

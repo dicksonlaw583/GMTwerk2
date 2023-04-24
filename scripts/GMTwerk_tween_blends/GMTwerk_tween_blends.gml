@@ -1,16 +1,20 @@
 ///@func tb_rgb(col0, col1, t)
-///@param col0
-///@param col1
-///@param t
-function tb_rgb(col0, col1, t) {
+///@param {Constant.Color} col0 The starting colour
+///@param {Constant.Color} col1 The ending colour
+///@param {Real,Undefined} t Interpolation coefficient (0-1); undefined to find distance
+///@return {Real,Constant.Color}
+///@desc Blend kernel for transitioning colours in RGB space.
+function tb_rgb(col0, col1, t=undefined) {
 	return is_undefined(t) ? max(abs(color_get_red(col0)-color_get_red(col1)), abs(color_get_green(col0)-color_get_green(col1)), abs(color_get_blue(col0)-color_get_blue(col1))) : merge_colour(col0, col1, t);
 }
 
 ///@func tb_hsv(col0, col1, t)
-///@param col0
-///@param col1
-///@param t
-function tb_hsv(col0, col1, t) {
+///@param {Constant.Color} col0 The starting colour
+///@param {Constant.Color} col1 The ending colour
+///@param {Real,Undefined} t Interpolation coefficient (0-1); undefined to find distance
+///@return {Real,Constant.Color}
+///@desc Blend kernel for transitioning colours in HSV space by nearest hue angle approach.
+function tb_hsv(col0, col1, t=undefined) {
 	var _hd0 = floor(color_get_hue(col0)*360/256);
 	var _hd1 = floor(color_get_hue(col1)*360/256);
 	var _s0 = color_get_saturation(col0);
@@ -26,10 +30,12 @@ function tb_hsv(col0, col1, t) {
 }
 
 ///@func tb_angle(angle0, angle1, t)
-///@param angle0
-///@param angle1
-///@param t
-function tb_angle(angle0, angle1, t) {
+///@param {Real} angle0 The starting angle in degrees
+///@param {Real} angle1 The ending angle in degrees
+///@param {Real,Undefined} t Interpolation coefficient (0-1); undefined to find distance
+///@return {Real}
+///@desc Blend kernel for transitioning angles in degrees by nearest approach.
+function tb_angle(angle0, angle1, t=undefined) {
 	var _ad = angle_difference(angle1, angle0);
 	if (is_undefined(t)) {
 		return abs(_ad);
@@ -39,10 +45,12 @@ function tb_angle(angle0, angle1, t) {
 }
 
 ///@func tb_vector(v0, v1, t)
-///@param v0
-///@param v1
-///@param t
-function tb_vector(v0, v1, t) {
+///@param {Array<Real>} v0 The starting vector
+///@param {Array<Real>} v1 The ending vector
+///@param {Real,Undefined} t Interpolation coefficient (0-1); undefined to find distance
+///@return {Real,Array<Real>}
+///@desc Blend kernel for transitioning arrays as vectors.
+function tb_vector(v0, v1, t=undefined) {
 	var _vdim = array_length(v0);
 	if (is_undefined(t)) {
 		var _vsum = 0;

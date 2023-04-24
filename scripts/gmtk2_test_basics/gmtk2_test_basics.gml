@@ -1,4 +1,5 @@
 ///@func gmtk2_test_basics()
+///@desc Test foundational GMTwerk 2 classes.
 function gmtk2_test_basics() {
 	var actor, actor2, actor3, bank;
 	
@@ -31,7 +32,7 @@ function gmtk2_test_basics() {
 	assert_equal(actor2.state, GMTWERK_STATE.DONE, "GMTwerkActor Done 2");
 	
 	// Convert Time
-	assert_equal(actor.convertTime(500), room_speed/2, "GMTwerkActor Convert Time 1a");
+	assert_equal(actor.convertTime(500), game_get_speed(gamespeed_fps)/2, "GMTwerkActor Convert Time 1a");
 	assert_equal(actor.convertTime(int64(20)), 20, "GMTwerkActor Convert Time 1b");
 	assert_equal(actor2.convertTime(234), 234000, "GMTwerkActor Convert Time 2a");
 	assert_equal(actor2.convertTime(int64(345)), 345, "GMTwerkActor Convert Time 2b");

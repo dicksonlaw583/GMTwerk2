@@ -1,4 +1,5 @@
 ///@func gmtk2_test_tween()
+///@desc Test GMTwerk 2's Tween actor.
 function gmtk2_test_tween() {
 	var tweener, listener, selector;
 	#region Tween run to completion

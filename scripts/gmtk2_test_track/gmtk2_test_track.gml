@@ -1,4 +1,5 @@
 ///@func gmtk2_test_track()
+///@desc Test GMTwerk 2's Track actor.
 function gmtk2_test_track() {
 	var listener, tracker;
 	

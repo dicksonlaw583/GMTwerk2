@@ -1,4 +1,5 @@
 ///@func gmtk2_test_itinerary()
+///@desc Test GMTwerk 2's Itinerary actor.
 function gmtk2_test_itinerary() {
 	var itineraryActor;
 	var subject = {

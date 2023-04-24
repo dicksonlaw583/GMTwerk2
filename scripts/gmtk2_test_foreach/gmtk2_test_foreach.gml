@@ -1,4 +1,5 @@
 ///@func gmtk2_test_foreach()
+///@desc Test GMTwerk 2's ForEach actor.
 function gmtk2_test_foreach() {
 	var foreacher;
 	var subject = {
