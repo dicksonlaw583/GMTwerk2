@@ -1,4 +1,5 @@
 ///@func gmtk2_test_workflow()
+///@desc Test GMTwerk 2's Workflow actor.
 function gmtk2_test_workflow() {
 	var workflow, delays, delaySubjects;
 	var host = new GMTwerkBank();

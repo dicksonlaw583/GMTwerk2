@@ -1,4 +1,5 @@
 ///@func gmtk2_test_all()
+///@desc Test all GMTwerk features.
 function gmtk2_test_all() {
 	global.__test_fails__ = 0;
 	var timeA = current_time;

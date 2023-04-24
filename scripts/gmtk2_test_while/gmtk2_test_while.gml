@@ -1,4 +1,5 @@
 ///@func gmtk2_test_while()
+///@desc Test GMTwerk 2's While actor.
 function gmtk2_test_while() {
 	var whiler;
 	var subject = {

@@ -1,4 +1,5 @@
 ///@func gmtk2_test_delay()
+///@desc Test GMTwerk 2's Delay actor.
 function gmtk2_test_delay() {
 	var delay;
 	var subject = {

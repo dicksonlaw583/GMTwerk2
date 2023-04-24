@@ -1,4 +1,5 @@
 ///@func gmtk2_test_queuevalue()
+///@desc Test GMTwerk 2's QueueValue actor.
 function gmtk2_test_queuevalue() {
 	var listener, listenerPush, listenerClear, queuer;
 	listener = {

@@ -1,4 +1,5 @@
 ///@func gmtk2_test_whentrue()
+///@desc Test GMTwerk 2's WhenTrue actor.
 function gmtk2_test_whentrue() {
 	var whentruer;
 	var subject = {

@@ -1,4 +1,5 @@
 ///@func gmtk2_test_blends()
+///@desc Test GMTwerk 2's blend kernels.
 function gmtk2_test_blends() {
 	// RGB kernel
 	assert_equal(tb_rgb(make_color_rgb(255, 255, 255), make_color_rgb(127, 127, 127), undefined), 128, "RGB kernel 1");

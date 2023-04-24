@@ -1,4 +1,5 @@
 ///@func gmtk2_test_selectors()
+///@desc Test GMTwerk 2's variable selectors.
 function gmtk2_test_selectors() // Feather disable GM1041
 {
 	var selector, temp;

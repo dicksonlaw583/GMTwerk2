@@ -1,4 +1,5 @@
 ///@func gmtk2_test_logvalue()
+///@desc Test GMTwerk 2's LogValue actor.
 function gmtk2_test_logvalue() {
 	var selector, listener, logger;
 	

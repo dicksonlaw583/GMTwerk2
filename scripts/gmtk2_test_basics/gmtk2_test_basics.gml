@@ -1,4 +1,5 @@
 ///@func gmtk2_test_basics()
+///@desc Test foundational GMTwerk 2 classes.
 function gmtk2_test_basics() {
 	var actor, actor2, actor3, bank;
 	

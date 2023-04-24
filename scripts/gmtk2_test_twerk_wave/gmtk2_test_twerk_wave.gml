@@ -1,4 +1,5 @@
 ///@func gmtk2_test_twerk_wave()
+///@desc Test GMTwerk 2's wave functions.
 function gmtk2_test_twerk_wave() {
 	var twerker, listener;
 	

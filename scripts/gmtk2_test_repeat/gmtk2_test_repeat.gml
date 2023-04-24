@@ -1,4 +1,5 @@
 ///@func gmtk2_test_repeat()
+///@desc Test GMTwerk 2's Repeat actor.
 function gmtk2_test_repeat() {
 	var repeater;
 	var subject = {

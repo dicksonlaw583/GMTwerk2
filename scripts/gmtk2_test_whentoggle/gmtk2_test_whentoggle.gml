@@ -1,4 +1,5 @@
 ///@func gmtk2_test_whentoggle()
+///@desc Test GMTwerk 2's WhenToggle actor.
 function gmtk2_test_whentoggle() {
 	var whentoggler;
 	var subject = {
